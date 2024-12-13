@@ -1,0 +1,423 @@
+// Chat.module.scss
+
+.container {
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    font-family: ui-sans-serif,-apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica,Apple Color Emoji,Arial,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 16px;
+}
+
+.chatContainer {
+    max-width: 712px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: ui-sans-serif,-apple-system,system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica,Apple Color Emoji,Arial,Segoe UI Emoji,Segoe UI Symbol;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+    font-size: 17px;
+    position: relative;
+}
+
+.overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 101;
+}
+
+.completionArea {
+    padding: 15px 0;
+    margin-bottom: 4em;
+    overflow-y: auto;
+    flex: 1 1;
+    line-height: 1.2rem;
+    
+
+    & > pre {
+        line-height: 1.1rem;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+    }
+
+    & > .thinking {
+        font-style: italic;
+        font-size: 0.8em;
+        color: gray;
+        padding: 8px;
+    }
+}
+
+.answerArea {
+    display: flex;
+    // align-items: flex-end;
+    flex-direction: column;
+}
+
+.loadingArea {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inputArea {
+    width: 100%;
+    max-width: 712px;
+    margin-left: -10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; // background color similar to ChatGPT
+    // border-top: 1px solid #e0e0e0; // optional, for border at the to
+    position:fixed;
+    bottom: 0;
+
+    p {
+        padding: 5px 0;
+        font-size: 12px;
+    }
+    // left: 0;
+
+}
+
+.inputContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 712px; // adjust the max-width as per your layout
+    background-color: #f5f5f5;
+    border: 1px solid #f5f5f5;
+    border-radius: 50px; // rounded corners
+    padding: 7px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chatInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    max-height: 40px;    
+    padding: 8px 20px;
+    font-size: 16px;
+    border-radius: 50px;
+    background-color: transparent;
+    color: #333;
+    resize: none;
+
+    // take out focusblue outline
+    box-shadow: 0 0 0 0;
+
+    &:focus {
+        box-shadow: 0 0 0 0;
+    }
+
+}
+
+.chatInput::placeholder {
+    color: #999;
+}
+
+.submitButton {
+    background-color: #000;
+    border: none;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 50px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.submitButton:hover:not(:disabled) {
+    background-color: #000;
+}
+  
+
+// .inputForm {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 10px;
+// }
+
+// .inputField {
+//     flex-grow: 1;
+//     padding: 10px;
+//     border: 1px solid #ccc;
+//     border-radius: 4px;
+//     height: 100px;
+//     font-size: 16px;
+
+//     &:focus {
+//         outline: none;
+//         border-color: #007bff;
+//     }
+// }
+
+// .button {
+//     padding: 0.5rem;
+//     background-color: #007bff;
+//     color: white;
+//     border: none;
+//     border-radius: 4px;
+//     cursor: pointer;
+//     font-size: 14px;
+//     transition: background-color 0.3s ease;
+
+//     &:hover {
+//         background-color: #0056b3;
+//     }
+// }
+
+// .submitButton {
+//     @extend .button;
+//     padding: 10px 20px;
+//     font-size: 16px;
+//     flex: 0;
+//     width: 200px;
+// }
+
+.admin {
+    border-top: 1px solid #ccc;
+    background: #f8f9fa;
+    position: fixed;
+    z-index: 2000;
+    bottom: 0;
+    left: 0;
+    width: 20vw;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    // & > .promptButton {
+    //     @extend .button;
+    // }
+
+    & .modelSelect {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+}
+
+/* Custom styles for code blocks */
+
+.markdown-content pre {
+    background: #000; /* Black background for code blocks */
+    color: #fff; /* White text for code blocks */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    overflow-x: auto;
+    position: relative;
+}
+
+.markdown-content code {
+    background: #222;
+    padding: 2px 5px;
+    border-radius: 3px;
+    // color: #e96900;
+}
+
+/* Code block with header */
+.code-block {
+    margin-bottom: 1.5em;
+}
+
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+
+.cursor {
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    padding: 0 2px;
+    animation: blink 1s step-end infinite;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.copy-button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.copy-button i {
+    margin-left: 5px;
+}
+
+/* Additional styles */
+.markdownContent {
+    color: black;
+    
+    pre {
+        background: #121212; /* Black background for code blocks */
+        color: #fff; /* White text for code blocks */
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        position: relative;
+        margin: 0;
+        margin: 20px 0;
+        max-width: 650px;
+        width: 100%;
+    }
+
+    code {
+        // background: #222;
+        // padding: 2px 5px;
+        border-radius: 3px;
+        // color: #e96900;
+    }
+
+    h3 {
+        font-size: 1.45em;
+        line-height: 1.2em;
+        padding: 20px 0;
+    }
+
+    h4 {
+        font-size: 1.1em;
+        line-height: 1.1em;
+    }
+
+    h3 {
+        padding: 16px 0;
+    }
+
+    h1, h2, h3, h4 {
+        font-weight: 600;
+        padding: 12px 0;
+    }
+
+    li {
+        padding: 0px 0;
+    }
+
+    p, li {
+        line-height: 1.7em;
+    }
+    
+    a {
+        color: blue;
+        cursor: pointer;
+    }
+}
+
+.codeBlock {
+    margin-bottom: 1.5em;
+    max-width: 700px;
+    overflow: scroll;
+}
+
+.codeHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #222;
+    color: #fff;
+    padding: 5px 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.copyButton {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.8em;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.copyButton i {
+    margin-left: 5px;
+}
+
+/* Additional styles */
+.markdownContent h1 {
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+}
+
+.markdownContent h2 {
+    font-size: 1.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+}
+
+.markdownContent ul, .markdownContent ol {
+    margin: 1em 0;
+    padding: 0 1em;
+}
+
+.markdownContent blockquote {
+    margin: 0;
+    padding-left: 1em;
+    border-left: 0.25em solid #dfe2e5;
+    color: #6a737d;
+}
+
+.messageBubble {
+    align-self: flex-end;
+    background-color: #007bff;
+    color: white;
+    padding: 16px;
+    border-radius: 18px;
+    display: inline-block;
+    margin: 24px 0;
+    margin-top: 32px;
+    max-width: 70%;
+}
+
+.botMsg {
+    align-self: flex-start;
+}

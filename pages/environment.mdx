@@ -1,0 +1,109 @@
+# Importing and Utilizing Built-in Libraries
+
+The scripting environment allows you to import code from other scripts. You can also use some built-in libraries such as Three.js for 3D rendering or Rapier for physics simulations.
+
+This integration enables the creation of more complex and visually appealing games, leveraging well-established web language libraries.
+
+The bulk of the oncyber Scripting API is exposed by **`@oo/scripting`**. This package contains some important global objects that give access to the current game world and its content. For example:
+
+```ts copy
+import {  World, Components } from "@oo/scripting"
+```
+
+Additionally, the Editor provides access to other useful libraries for various tasks (3D, Physics, UI, etc).
+
+## [Threejs](https://threejs.org/) (3D Graphics)
+
+The oncyber game engine is built on top of the [**Three.js**](https://threejs.org/) library. **Three.js** is a battle-tested JavaScript library used to create and display 3D graphics in a web browser.
+
+You can access the three.js library directly from you script by importing from the **`three`** package. For example:
+
+```ts copy
+import { Vector3 } from "three"
+```
+
+## [Rapier](https://rapier.rs/docs/) (Physics)
+
+The oncyber game engine handles game physics via the [**Rapier**](https://rapier.rs/docs/) library. **Rapier** is a physics engine written using the Rust programming language, offering efficient simulation of Rigid Body dynamics.
+
+It is optimized for performance, supporting a range of collision shapes and constraints. 
+
+> Note: the oncyber game engine use the webassembly version of Rapier.
+
+You can access Rapier from you script by importing the **`"@dimforge/rapier3d"`** package. For example:
+
+```ts copy
+import * as RAPIER from "@dimforge/rapier3d"
+```
+
+## [React](https://react.dev/) (UI)
+
+To add UI elements to your game, you can use the [React](https://react.dev/) library. **React** is an open-source JavaScript library for building user interfaces, particularly web applications with dynamic, interactive elements.
+
+React emphasizes a component-based architecture, allowing developers to create reusable UI components.
+
+To use React from in scripts, you can import from the `"react"` package. For example:
+
+```ts copy
+import * as React from "react"
+// or
+import { useState } from "react"
+```
+
+The code editor supports JSX syntax, so you can create your Components the same way you do in a typical React application. For example:
+
+```tsx copy
+function GameTimer({ remainingSeconds }) {
+
+    return <div>{remainingSeconds}s</div>
+}
+```
+
+As an example of how to render a Component, you can use the same code in the [Getting Started course](getting\_started/#adding-a-timer-and-ending-the-game)
+
+```tsx copy filename="main" {1, 5-8, 11-17, 21, 25, 30-32}
+import { UI } from "@oo/scripting"
+
+export default class MyGame {
+
+    maxGameSeconds = 60
+    remainingSeconds = 0
+    interval;
+    renderer = UI.createRenderer();
+
+    onStart = () => {
+        this.remainingSeconds = this.maxGameSeconds;
+        this.interval = setInterval(() => {
+            this.remainingSeconds -= 1;
+            this.renderer.render(
+                <GameTimer remainingSeconds={this.remainingSeconds} />
+            )
+        }, 1000)
+    }
+
+    onDispose = () => {
+        clearInterval(this.interval)
+    }
+
+    onEnd = () => {
+        clearInterval(this.interval)
+    }
+
+}
+
+function GameTimer({ remainingSeconds }) {
+    return <div>{remainingSeconds}s</div>
+}
+```
+
+## [AnimeJS](https://animejs.com/) (Animation)
+
+We also provide access to [AnimeJS](https://animejs.com/). AnimeJS is a robust JavaScript library that can be used to animate pretty much anything (3D models, UI elements, etc).
+
+You can import it from the `"AnimeJS"` package. For example:
+
+```ts copy
+import anime from "animejs"
+```
+
+Visit our [Animation Guide](./guides/getting_started.mdx) for more insights into using this library with oncyber.

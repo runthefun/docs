@@ -1,0 +1,42 @@
+# Interacting with the PlayerControls Component from Code
+
+If one of your scripts needs to interact with the PlayerControls component directly, you access certain settings through code.
+
+The following example shows how to activate and deactivate the controls:
+
+```ts copy filename="main" {1, 6-9}
+import PlayerControls from "./PlayerControls"
+
+export default class Game {
+
+    onReady = () => {
+        const playerControls = PlayerControls.getMain();
+        playerControls.active = false;
+        playerControls.active = true;
+    }
+}
+```
+
+In the example above, we import the PlayerControls component, get its main instance, and set the booleans (true/false values) for whether the controls are active or not.
+
+At the moment, the PlayerControls component only exposes a few settings through code, like enabling and disabling the controls.
+
+However, we can access the [inner controls](../reference/platformercontrolswrapper.md) for additional options.
+
+```ts copy filename="main" {1, 6-9}
+import PlayerControls from "./PlayerControls"
+
+export default class Game {
+
+    onReady = () => {
+        const platformerControls = PlayerControls.getMain().controls;
+        // prevent the controls from animating the avatar
+        platformerControls.autoAnimate = false;
+        // more soon
+    }
+}
+```
+
+> Note: the autoAnimate setting in the code example above can also be found and set as a frontend toggle -- however, the available inner controls settings may differ for the platformer and platformer2 ControlsMode.
+
+For additional flexibility and customization, you also edit the code for the default PlayerControls component in the Script Editor, or even create your own [custom controls](../controls/custom.md) from scratch.

@@ -1,0 +1,183 @@
+# Creating Custom Controls
+
+The first step to creating your own custom controls from scratch is to remove the default PlayerControls instance from the scene, in order to make way for your own.
+
+You can do this by selecting PlayerControls in the WorldItems list at the right and clicking the Garbage Can icon that appears to the rights of the component's name.
+
+Next, let's start by creating a new component for our custom controls in a new file in the Script editor:
+
+```ts copy
+import { ScriptComponent } from "@oo/scripting"
+
+export default class Controls extends ScriptComponent {
+
+
+}
+```
+
+## Camera
+
+The oncyber [camera](../reference/maincamera.md) comes with its own internal controls you can use. These are separate from the avatar movement controls.
+
+Let's activate the camera and set its mode to `thirdperson`:
+
+```ts copy {1, 6-7} /, Camera/
+import { ScriptComponent, Camera } from "@oo/scripting"
+
+export default class Controls extends ScriptComponent {
+
+    onReady = () => {
+        Camera.useControls("thirdperson"); // set the controls mode to third person 
+        Camera.controls.target = this.target; // set the target of the camera to the player, the same as this
+    }
+
+}
+```
+
+## Avatar Controls and the Player Collider
+
+Creating robust user controls from scratch is an extensive and complex process.
+
+In this example, we'll provide a relatively simple annotated custom control scheme that you can use as a starting point to work from.
+
+> Note: In certain cases, you may not need a character controller at all -- for example, if the main target of the controls in your oncyber experience is a dynamic body, or it doesn't need to have collisions/be blocked by objects, or you're making your own collision effects.
+
+In oncyber, the user's avatar utilizes a special [Player collider](../reference/ColliderType.md) with kinematic properties (meaning collisions are defined by coded conditions instead of the physics engine).
+
+In this case, we want the user's avatar to react to walls and other collisions, so we're going to import and use the `BasicCharacterController` exposed by `oo/scripting` -- this automatically abstracts a number of particularly complex code elements.
+
+Below, you'll find an annotated custom controls script with line-by-line descriptions of what each portion of code does -- read through to understand what the different segments do in your game:
+
+```ts copy
+import { ScriptComponent, Camera, Param, BasicCharacterController, AvatarComponent, Player, Emitter, Events, Component3D } from '@oo/scripting'
+
+import { Vector3 } from 'three';
+ 
+export default class Controls extends ScriptComponent {
+    
+    @Param({ type: "number" })
+    speed = 10;
+
+    private controller = new BasicCharacterController();
+    private _target: AvatarComponent;
+    private velocity = new Vector3();
+    private gravity = -9.8;
+    private jumpVelocity = 5;
+    private actions = { jump: false, forward: false, backward: false, left: false, right: false }
+    private onFloor = false;
+    
+    get target() {
+        return this._target;
+    }
+
+    set target(newTarget: AvatarComponent) {
+        this._target = newTarget;
+    }
+
+    onReady = () => {
+        this.target = Player.avatar;
+        Camera.useControls("thirdperson"); // set the controls mode to third person 
+        Camera.controls.target = this.target; // set the target of the camera to the player, the same as this
+        // we use the events Emitter to listen to keyboard events
+        Emitter.on(Events.KEY_DOWN, this.onKeyDown); 
+        Emitter.on(Events.KEY_UP, this.onKeyUp);
+    }
+ 
+    onUpdate = (deltaTime: number) => {
+        this.applyGravity(deltaTime);
+        this.applyJump(deltaTime);
+        this.applyMovement(deltaTime);
+        this.computePosition(deltaTime);
+        this.rotateAvatar(deltaTime);
+        this.playAnimation(deltaTime);
+    }
+ 
+    applyGravity(deltaTime: number) {
+        // when the player is not on the floor we add a downward force to simulate gravity
+        if (!this.onFloor) this.velocity.y += this.gravity * deltaTime;
+    }
+    
+    applyJump(_deltaTime: number){
+        // when the player is on the floor and is jumping we add set the upward velocity to our jump velocity
+        if (this.actions.jump && this.onFloor) this.velocity.y = this.jumpVelocity;
+        // we disable the jump so we don't jump multiple times if we're still on the floor
+        this.actions.jump = false; 
+    }
+ 
+    // we use a temporary vector here to avoid creating a new vector every frame
+    private _tmpV1 = new Vector3();
+    applyMovement(deltaTime: number) {
+        // depending on the pressed key we change the current left/right/forward/backward velocity
+        this._tmpV1.x = this.actions.left ? -1 : this.actions.right ? 1 : 0;
+        this._tmpV1.z = this.actions.forward ? -1 : this.actions.backward ? 1 : 0;
+        // we rotate the direction toward the camera, so when the player move forward he moves relative to where to camera is looking at
+        this._tmpV1.applyQuaternion(Camera.quaternion);
+        // we cancel the Y direction as the camera may be looking downward or upward
+        this._tmpV1.y = 0;
+        // we apply the speed, we need to normalize the vector as now that we canceled the y composant the length is not 1
+        this._tmpV1.normalize().multiplyScalar(this.speed);
+        this.velocity.x = this._tmpV1.x; 
+        this.velocity.z = this._tmpV1.z; 
+
+    }
+ 
+    // we use a temporary vector here to avoid creating a new vector every frame
+    private _tmpV2 = new Vector3();
+    computePosition(deltaTime: number) {
+        // once we have the current velocity at this frame we multiply it my detlatime to get the current movement
+        const movement = this._tmpV2.copy(this.velocity).multiplyScalar(deltaTime);
+        // we now use the controller on the player to move it by our movement vector, the controller will move the player and handle basic collision by blocking the player when he hits walls
+        // the update function also let us now if the current target collider is on the floor or not  after the movement 
+        const { onFloor } = this.controller.update(this.target, movement, deltaTime);
+        this.onFloor = onFloor;
+    }
+
+    // we use a temporary vector here to avoid creating a new vector every frame
+    private _tmpV3 = new Vector3();
+    rotateAvatar(_deltaTime: number) {
+        // if the player is not moving we don't rotate it
+        if (Math.abs(this.velocity.x) < 0.1 && Math.abs(this.velocity.z) < 0.1) return;
+        this._tmpV3.copy(this.velocity).normalize();
+        // calculate the angle using atan2
+        let angle = Math.atan2(this._tmpV3.x, this._tmpV3.z);
+        // set the avatar's rotation.y to the calculated angle
+        this.target.rotation.y = Math.PI + angle;
+    }
+ 
+    playAnimation(_deltaTime: number) {
+        // we now need to choose which animation to play on the avatar depending on the current state of the controls
+        let newAnimation = "idle";
+        if(Math.abs(this.velocity.x) > 0.1 || Math.abs(this.velocity.z) > 0.1) newAnimation = "run";        
+        if(!this.onFloor && this.velocity.y > 0) newAnimation = "jump";
+        if(!this.onFloor && this.velocity.y <= 0) newAnimation = "fly";
+        // if the new animation is different than the current animation we play the new one
+        if(newAnimation != this.target.animation) this.target.animation = newAnimation
+    }
+    
+    onKeyDown = ({ code }) => this.handleKey(code, true);
+    onKeyUp = ({ code }) => this.handleKey(code, false);
+ 
+    handleKey(code: string, isDown: boolean) {
+        // detecting which key is pressed and setting the current actions accordingly
+        switch (code) {
+            case 'Space': this.actions.jump = isDown; break;
+            case 'KeyW': this.actions.forward = isDown; break;
+            case 'KeyS': this.actions.backward = isDown; break;
+            case 'KeyA': this.actions.left = isDown; break;
+            case 'KeyD': this.actions.right = isDown; break;
+        }
+    }
+ 
+    onDispose() {
+        // cleaning the event listeners 
+        Emitter.off(Events.KEY_DOWN, this.onKeyDown);
+        Emitter.off(Events.KEY_UP, this.onKeyUp);
+    }
+}
+```
+
+To test the example custom controls above, just paste the code over the new script you started earlier, and click the Preview button.
+
+> Note: When dealing with keys it's important to use event.code so 'wasd' translate to other keyboard layouts.
+> 
+> Here, KeyA refers to the key position on the keyboard, not the A character. On a different keyboard layout, it could be a different key -- on azerty keyboards, for example, KeyA refers to Q.

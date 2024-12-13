@@ -1,0 +1,23 @@
+{
+    "index": "Ask AI",
+    "welcome": "Welcome",
+    "guides": "Guides",
+    "lifecycle": "Scripts Lifecycle",
+    "components_guide": "Using Components",
+    "animations": "Playing Animations",
+    "behaviors": "Behaviors",
+    "components": "Custom Components",
+    "controls": "Controls",
+    "prefabs": "Prefabs And Groups",
+    "physics": "Working With Physics",
+    "ui": "Rendering UI",
+    "multiplayer": "Multiplayer",
+    "custom_server": "Custom Server",
+    "environment": "Builtin Libraries",
+    "---": {
+        "type": "separator"
+    },
+    "reference": {
+        "title": "API Reference"
+    }
+}
