@@ -1,8 +1,10 @@
 
-## Resource.\_state property
+## Resource.state property
 
 **Signature:**
 
 ```typescript
-protected _state: ResourceState;
+get state(): ResourceState;
+```
+
 ```

@@ -32,7 +32,7 @@ player
 
 </td><td>
 
-[PlayerData](/reference/playerdata.md)
+PlayerData
 
 
 </td><td>

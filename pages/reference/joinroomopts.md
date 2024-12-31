@@ -125,4 +125,23 @@ _(Optional)_ Usually the roomId is managed by the application (e.g. from invite 
 
 
 </td></tr>
+<tr><td>
+
+[serverEngine?](/reference/joinroomopts/serverengine.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
 </tbody></table>

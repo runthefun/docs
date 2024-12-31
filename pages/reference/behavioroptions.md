@@ -89,6 +89,25 @@ _(Optional)_
 </td></tr>
 <tr><td>
 
+[server?](/reference/behavioroptions/server.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
 [tip?](/reference/behavioroptions/tip.md)
 
 

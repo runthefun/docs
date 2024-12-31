@@ -6,5 +6,5 @@ Returns the status of the connection; possible values are: "disconnected", "conn
 **Signature:**
 
 ```typescript
-get status(): "disconnected" | "connecting" | "connected";
+get status(): ConnectionStatus;
 ```

@@ -4,5 +4,5 @@
 **Signature:**
 
 ```typescript
-options: Getter<string[]>;
+options?: Options<T>;
 ```

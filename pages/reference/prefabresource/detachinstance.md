@@ -1,10 +1,10 @@
 
-## PrefabResource.\_detachInstance() method
+## PrefabResource.detachInstance() method
 
 **Signature:**
 
 ```typescript
-_detachInstance(instance: Component3D, idToPrefabId?: any): void;
+detachInstance(instance: Component3D): void;
 ```
 
 ## Parameters
@@ -39,9 +39,12 @@ instance
 
 
 </td></tr>
-<tr><td>
+</tbody></table>
+**Returns:**
 
-idToPrefabId
+void
+
+fabId
 
 
 </td><td>

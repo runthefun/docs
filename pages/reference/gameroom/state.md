@@ -8,5 +8,5 @@ cf [BaseRoomState](/reference/baseroomstate.md) for common properties on the sta
 **Signature:**
 
 ```typescript
-get state(): S;
+get state(): any;
 ```

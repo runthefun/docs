@@ -49,6 +49,23 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[\_canZoom](/reference/thirdpersoncameracontrolswrapper/_canzoom.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [$$lerp](/reference/thirdpersoncameracontrolswrapper/__lerp.md)
 
 
@@ -136,6 +153,23 @@ Vector3
 </td></tr>
 <tr><td>
 
+[canZoom](/reference/thirdpersoncameracontrolswrapper/canzoom.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [controller](/reference/thirdpersoncameracontrolswrapper/controller.md)
 
 
@@ -208,6 +242,23 @@ Represents the vertical offset from the target object
 </td></tr>
 <tr><td>
 
+[loadState](/reference/thirdpersoncameracontrolswrapper/loadstate.md)
+
+
+</td><td>
+
+
+</td><td>
+
+(state: any) =&gt; void
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [lockAxis](/reference/thirdpersoncameracontrolswrapper/lockaxis.md)
 
 
@@ -241,6 +292,23 @@ number
 </td><td>
 
 Represents the maximum distance from the target object
+
+
+</td></tr>
+<tr><td>
+
+[saveState](/reference/thirdpersoncameracontrolswrapper/savestate.md)
+
+
+</td><td>
+
+
+</td><td>
+
+() =&gt; { spherical: Spherical; targetSpherical: Spherical; idealCameraPosition: Vector3; idealCameraTarget: Vector3; cameraPosition: Vector3; cameraTarget: Vector3; cameraHeight: number; theta: number; phi: number; currentZoom: number; }
+
+
+</td><td>
 
 
 </td></tr>

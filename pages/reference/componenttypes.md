@@ -50,9 +50,13 @@ export type ComponentTypeMap = {
     spline: SplineComponent;
     cache: CacheComponent;
     agora: AgoraComponent;
+    webrtc: WebRTCComponent;
     batch: BatchComponent;
     group: GroupComponent;
     iframe: IframeComponent;
+    particles: ParticlesComponent;
+    multiplayer: MultiplayerComponent;
+    navmesh: NavmeshComponent;
 };
 ```
 **References:** [BackgroundComponent](/reference/backgroundcomponent.md)<!-- -->, [LightingComponent](/reference/lightingcomponent.md)<!-- -->, [WaterComponent](/reference/watercomponent.md)<!-- -->, [FogComponent](/reference/fogcomponent.md)<!-- -->, [TerrainComponent](/reference/terraincomponent.md)<!-- -->, [PostProcessingComponent](/reference/postprocessingcomponent.md)<!-- -->, [ReflectorComponent](/reference/reflectorcomponent.md)<!-- -->, [RainComponent](/reference/raincomponent.md)<!-- -->, [EnvmapComponent](/reference/envmapcomponent.md)<!-- -->, [SpawnComponent](/reference/spawncomponent.md)<!-- -->, [MeshComponent](/reference/meshcomponent.md)<!-- -->, [ModelComponent](/reference/modelcomponent.md)<!-- -->, [TextComponent](/reference/textcomponent.md)<!-- -->, [AudioComponent](/reference/audiocomponent.md)<!-- -->, [ImageComponent](/reference/imagecomponent.md)<!-- -->, [WindComponent](/reference/windcomponent.md)<!-- -->, [VideoComponent](/reference/videocomponent.md)<!-- -->, [KitBashComponent](/reference/kitbashcomponent.md)<!-- -->, [AvatarComponent](/reference/avatarcomponent.md)<!-- -->, [MagneticFieldComponent](/reference/magneticfieldcomponent.md)<!-- -->, [PlatformComponent](/reference/platformcomponent.md)<!-- -->, [CloudComponent](/reference/cloudcomponent.md)<!-- -->, [BulletComponent](/reference/bulletcomponent.md)<!-- -->, [GodrayComponent](/reference/godraycomponent.md)<!-- -->, [BirdComponent](/reference/birdcomponent.md)<!-- -->, [ShadowFloorComponent](/reference/shadowfloorcomponent.md)<!-- -->, [DustComponent](/reference/dustcomponent.md)

@@ -1,8 +1,10 @@
 
-## Resource.\_data property
+## Resource.data property
 
 **Signature:**
 
 ```typescript
-protected _data: Data;
+get data(): Data;
+```
+
 ```

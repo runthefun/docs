@@ -1,14 +1,15 @@
 
 ## GameRoom.send() method
 
-Sends a message to the server, the data type is specific to the game
-
-For example `client.send({ type: "hit", damage: 10 })`
+> Warning: This API is now obsolete.
+> 
+> use `send(type: string | number, data: any): void;` instead
+> 
 
 **Signature:**
 
 ```typescript
-send(data: CM): void;
+send(message: any): any;
 ```
 
 ## Parameters
@@ -31,12 +32,12 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-data
+message
 
 
 </td><td>
 
-CM
+any
 
 
 </td><td>
@@ -46,5 +47,5 @@ CM
 </tbody></table>
 **Returns:**
 
-void
+any
 

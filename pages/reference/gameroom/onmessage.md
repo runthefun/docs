@@ -1,12 +1,15 @@
 
 ## GameRoom.onMessage() method
 
-listen to incoming messages from the server
+> Warning: This API is now obsolete.
+> 
+> use `onMessage(type: string | number, listener: (data: any) => void): () => void;` instead
+> 
 
 **Signature:**
 
 ```typescript
-onMessage(listener: (data: any) => unknown): () => void;
+onMessage(listener: (data: any) => void): () => void;
 ```
 
 ## Parameters
@@ -34,7 +37,7 @@ listener
 
 </td><td>
 
-(data: any) =&gt; unknown
+(data: any) =&gt; void
 
 
 </td><td>

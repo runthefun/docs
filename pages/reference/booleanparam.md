@@ -4,9 +4,9 @@
 **Signature:**
 
 ```typescript
-export interface BooleanParam extends AbstractParam 
+export interface BooleanParam extends AbstractParam<boolean> 
 ```
-**Extends:** [AbstractParam](/reference/abstractparam.md)
+**Extends:** [AbstractParam](/reference/abstractparam.md)<!-- -->&lt;boolean&gt;
 
 ## Properties
 
@@ -32,25 +32,6 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
-
-[defaultValue?](/reference/booleanparam/defaultvalue.md)
-
-
-</td><td>
-
-
-</td><td>
-
-boolean
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
 
 [type?](/reference/booleanparam/type.md)
 

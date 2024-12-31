@@ -41,6 +41,25 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[activeAnimations](/reference/modelcomponent/activeanimations.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+any
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [enableAnimation](/reference/modelcomponent/enableanimation.md)
 
 
@@ -137,6 +156,20 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[\_getBBoxImp(target)](/reference/modelcomponent/_getbboximp.md)
+
+
+</td><td>
+
+`protected`
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [dispose()](/reference/modelcomponent/dispose.md)
 
 
@@ -207,7 +240,7 @@ Set the time of an animation on the 3D model
 </td></tr>
 <tr><td>
 
-[stop(name)](/reference/modelcomponent/stop.md)
+[stop(name, opts)](/reference/modelcomponent/stop.md)
 
 
 </td><td>

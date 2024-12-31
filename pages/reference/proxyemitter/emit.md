@@ -1,11 +1,9 @@
 
-## ProxyEmitter.\_EMIT\_ property
+## ProxyEmitter.emit property
 
 
 **Signature:**
 
 ```typescript
-_EMIT_?: boolean;
-```
-string>(name: K, ...args: T[K]) => void;
+emit?: <K extends keyof T & string>(name: K, ...args: T[K]) => void;
 ```

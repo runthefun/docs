@@ -130,6 +130,18 @@ Description
 </td></tr>
 <tr><td>
 
+[getCollisionMesh()](/reference/magneticfieldcomponent/getcollisionmesh.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [init()](/reference/magneticfieldcomponent/init.md)
 
 

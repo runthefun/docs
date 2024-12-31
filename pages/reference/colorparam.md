@@ -4,9 +4,9 @@
 **Signature:**
 
 ```typescript
-export interface ColorParam extends AbstractParam 
+export interface ColorParam extends AbstractParam<string> 
 ```
-**Extends:** [AbstractParam](/reference/abstractparam.md)
+**Extends:** [AbstractParam](/reference/abstractparam.md)<!-- -->&lt;string&gt;
 
 ## Properties
 
@@ -32,25 +32,6 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
-
-[defaultValue?](/reference/colorparam/defaultvalue.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
 
 [type?](/reference/colorparam/type.md)
 

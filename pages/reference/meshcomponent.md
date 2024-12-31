@@ -75,6 +75,23 @@ Geometry of the mesh. Defaults to a Box with a size of 1
 </td></tr>
 <tr><td>
 
+[image](/reference/meshcomponent/image.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [mesh](/reference/meshcomponent/mesh.md)
 
 
@@ -83,7 +100,7 @@ Geometry of the mesh. Defaults to a Box with a size of 1
 
 </td><td>
 
-Mesh
+Mesh&lt;BufferGeometry, MeshCompMaterial&gt;
 
 
 </td><td>
@@ -165,18 +182,6 @@ Description
 </td><td>
 
 `protected`
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[updateRenderMode()](/reference/meshcomponent/updaterendermode.md)
-
-
-</td><td>
 
 
 </td><td>

@@ -4,7 +4,9 @@
 **Signature:**
 
 ```typescript
-stop(name: string, opts: any): void;
+stop(name: string, opts: {
+        fadeOut?: number;
+    }): void;
 ```
 
 ## Parameters
@@ -46,7 +48,7 @@ opts
 
 </td><td>
 
-any
+{ fadeOut?: number; }
 
 
 </td><td>

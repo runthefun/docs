@@ -4,7 +4,7 @@
 **Signature:**
 
 ```typescript
-export interface AbstractParam 
+export interface AbstractParam<T = any> 
 ```
 
 ## Properties
@@ -70,6 +70,25 @@ _(Optional)_
 </td></tr>
 <tr><td>
 
+[defaultValue?](/reference/abstractparam/defaultvalue.md)
+
+
+</td><td>
+
+
+</td><td>
+
+T
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
 [format?](/reference/abstractparam/format.md)
 
 
@@ -79,6 +98,25 @@ _(Optional)_
 </td><td>
 
 Format
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[group?](/reference/abstractparam/group.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[FolderData](/reference/folderdata.md)
 
 
 </td><td>
@@ -108,6 +146,25 @@ _(Optional)_
 </td></tr>
 <tr><td>
 
+[label?](/reference/abstractparam/label.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
 [name?](/reference/abstractparam/name.md)
 
 
@@ -117,6 +174,44 @@ _(Optional)_
 </td><td>
 
 string
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[skipLabel?](/reference/abstractparam/skiplabel.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_
+
+
+</td></tr>
+<tr><td>
+
+[useFolder?](/reference/abstractparam/usefolder.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[FolderData](/reference/folderdata.md)
 
 
 </td><td>

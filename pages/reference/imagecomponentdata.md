@@ -54,6 +54,44 @@ _(Optional)_ if not provided, an auto id will be generated
 </td></tr>
 <tr><td>
 
+[magFilter?](/reference/imagecomponentdata/magfilter.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ Set the magFilter of the image. Defaults to 'LinearFilter'
+
+
+</td></tr>
+<tr><td>
+
+[minFilter?](/reference/imagecomponentdata/minfilter.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+_(Optional)_ Set the minFilter of the image. Defaults to 'LinearMipmapLinearFilter'
+
+
+</td></tr>
+<tr><td>
+
 [name?](/reference/imagecomponentdata/name.md)
 
 
@@ -180,6 +218,25 @@ string
 </td><td>
 
 url of the image file
+
+
+</td></tr>
+<tr><td>
+
+[useMipMap?](/reference/imagecomponentdata/usemipmap.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ Set if the image should use mipmaps. Defaults to true
 
 
 </td></tr>

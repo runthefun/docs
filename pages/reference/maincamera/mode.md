@@ -8,5 +8,5 @@
 **Signature:**
 
 ```typescript
-set mode(t: "thirdperson" | "firstperson");
+set mode(t: "firstperson" | "thirdperson");
 ```

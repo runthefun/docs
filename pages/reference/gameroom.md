@@ -141,6 +141,44 @@ Returns the last error message if any
 </td></tr>
 <tr><td>
 
+[opts](/reference/gameroom/opts.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ host: string; roomId: string; gameId: string; gameName?: string; engine: Engine; playerManager: [PlayerManager](/reference/playermanager.md)<!-- -->; disableSnapshots?: boolean; timeout?: number; remotePlayerOpts?: [PlayerAvatarOpts](/reference/playeravataropts.md)<!-- -->; multiRoom?: boolean; }
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[patchRate](/reference/gameroom/patchrate.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+Returns the patch rate of the server, this is the number of times the server sends a state update per second
+
+
+</td></tr>
+<tr><td>
+
 [players](/reference/gameroom/players.md)
 
 
@@ -250,7 +288,7 @@ Returns the session id of the client that is assigned by the server
 
 </td><td>
 
-S
+any
 
 
 </td><td>
@@ -273,7 +311,7 @@ cf [BaseRoomState](/reference/baseroomstate.md) for common properties on the sta
 
 </td><td>
 
-"disconnected" \| "connecting" \| "connected"
+ConnectionStatus
 
 
 </td><td>
@@ -320,7 +358,7 @@ number
 
 </td><td>
 
-Returns the tick rate of the server, this is the number of times the server sends a state update per second
+Returns the tick rate of the server, this is the fps of the simulation loop on the serve
 
 
 </td></tr>
@@ -345,6 +383,18 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
+
+[broadcast(message)](/reference/gameroom/broadcast.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
 
 [getPlayerStateSync(selector)](/reference/gameroom/getplayerstatesync.md)
 
@@ -403,6 +453,18 @@ listen to disconnect events, this is fired when the client is disconnected from 
 <tr><td>
 
 [onMessage(listener)](/reference/gameroom/onmessage.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[onMessage(type, listener)](/reference/gameroom/onmessage_1.md)
 
 
 </td><td>
@@ -472,6 +534,18 @@ listen to state events, this is fired whenever the client receives a state updat
 </td></tr>
 <tr><td>
 
+[onStatusChange(listener)](/reference/gameroom/onstatuschange.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [onStop(listener)](/reference/gameroom/onstop.md)
 
 
@@ -514,7 +588,19 @@ Sends a request to the server to start the game
 </td></tr>
 <tr><td>
 
-[send(data)](/reference/gameroom/send.md)
+[send(message)](/reference/gameroom/send.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[send(type, data)](/reference/gameroom/send_1.md)
 
 
 </td><td>

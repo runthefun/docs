@@ -4,9 +4,9 @@
 **Signature:**
 
 ```typescript
-export interface SelectParam extends AbstractParam 
+export interface SelectParam<T extends OptId = string> extends AbstractParam<T> 
 ```
-**Extends:** [AbstractParam](/reference/abstractparam.md)
+**Extends:** [AbstractParam](/reference/abstractparam.md)<!-- -->&lt;T&gt;
 
 ## Properties
 
@@ -33,25 +33,6 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[defaultValue?](/reference/selectparam/defaultvalue.md)
-
-
-</td><td>
-
-
-</td><td>
-
-string
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
-
 [mode?](/reference/selectparam/mode.md)
 
 
@@ -60,7 +41,7 @@ _(Optional)_
 
 </td><td>
 
-"buttons" \| "slider"
+"buttons" \| "slider" \| "dropdown"
 
 
 </td><td>
@@ -71,7 +52,7 @@ _(Optional)_
 </td></tr>
 <tr><td>
 
-[options](/reference/selectparam/options.md)
+[options?](/reference/selectparam/options.md)
 
 
 </td><td>
@@ -79,10 +60,12 @@ _(Optional)_
 
 </td><td>
 
-[Getter](/reference/getter.md)<!-- -->&lt;string\[\]&gt;
+Options&lt;T&gt;
 
 
 </td><td>
+
+_(Optional)_
 
 
 </td></tr>

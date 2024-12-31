@@ -6,5 +6,5 @@ This is the threejs mesh created from component data
 **Signature:**
 
 ```typescript
-mesh: Mesh;
+mesh: Mesh<BufferGeometry, MeshCompMaterial>;
 ```

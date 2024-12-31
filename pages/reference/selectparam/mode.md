@@ -4,5 +4,5 @@
 **Signature:**
 
 ```typescript
-mode?: "buttons" | "slider";
+mode?: "buttons" | "slider" | "dropdown";
 ```

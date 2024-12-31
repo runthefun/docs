@@ -4,5 +4,5 @@
 **Signature:**
 
 ```typescript
-type: "box" | "sphere" | "cylinder" | "dome";
+type: "plane" | "box" | "sphere" | "cylinder" | "dome";
 ```

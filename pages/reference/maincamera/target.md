@@ -4,5 +4,5 @@
 **Signature:**
 
 ```typescript
-set target(val: Object3D<import("three").Object3DEventMap>);
+set target(val: Object3D);
 ```

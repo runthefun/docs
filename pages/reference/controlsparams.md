@@ -15,5 +15,5 @@ export type ControlsParams = {
     default: DefaultControlParams;
 };
 ```
-**References:** [PlatformerControlsWrapperParams](/reference/platformercontrolswrapperparams.md)<!-- -->, [ThirdPersonCameraControlsWrapperParams](/reference/thirdpersoncameracontrolswrapperparams.md)
+**References:** [PlatformerControlsWrapperParams](/reference/platformercontrolswrapperparams.md)<!-- -->, [ThirdPersonCameraControlsWrapperParams](/reference/thirdpersoncameracontrolswrapperparams.md)<!-- -->, [DefaultControlParams](/reference/defaultcontrolparams.md)
 

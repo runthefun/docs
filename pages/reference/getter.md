@@ -4,5 +4,5 @@
 **Signature:**
 
 ```typescript
-export type Getter<T> = (() => T) | T | string;
+export type Getter<T> = (() => T) | T;
 ```
