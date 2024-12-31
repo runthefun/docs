@@ -4,9 +4,9 @@
 **Signature:**
 
 ```typescript
-export interface NumberParam extends AbstractParam 
+export interface NumberParam extends AbstractParam<number> 
 ```
-**Extends:** [AbstractParam](/reference/abstractparam.md)
+**Extends:** [AbstractParam](/reference/abstractparam.md)<!-- -->&lt;number&gt;
 
 ## Properties
 
@@ -32,25 +32,6 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
-
-[defaultValue?](/reference/numberparam/defaultvalue.md)
-
-
-</td><td>
-
-
-</td><td>
-
-number
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
 
 [max?](/reference/numberparam/max.md)
 

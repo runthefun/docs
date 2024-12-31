@@ -6,7 +6,9 @@ Stop an animation on the 3D model
 **Signature:**
 
 ```typescript
-stop(name?: string): void;
+stop(name: string, opts: {
+        fadeOut?: number;
+    }): void;
 ```
 
 ## Parameters
@@ -39,7 +41,19 @@ string
 
 </td><td>
 
-_(Optional)_
+
+</td></tr>
+<tr><td>
+
+opts
+
+
+</td><td>
+
+{ fadeOut?: number; }
+
+
+</td><td>
 
 
 </td></tr>

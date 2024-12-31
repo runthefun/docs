@@ -136,7 +136,41 @@ Represents the maximum distance from the target object, this is used in combinat
 
 </td><td>
 
-"thirdperson" \| "firstperson"
+"firstperson" \| "thirdperson"
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[sensitivityX](/reference/maincamera/sensitivityx.md)
+
+
+</td><td>
+
+
+</td><td>
+
+any
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[sensitivityY](/reference/maincamera/sensitivityy.md)
+
+
+</td><td>
+
+
+</td><td>
+
+any
 
 
 </td><td>
@@ -153,7 +187,7 @@ Represents the maximum distance from the target object, this is used in combinat
 
 </td><td>
 
-Object3D&lt;import("three").Object3DEventMap&gt;
+Object3D
 
 
 </td><td>

@@ -37,6 +37,23 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[\_audio](/reference/audiocomponent/_audio.md)
+
+
+</td><td>
+
+
+</td><td>
+
+HTMLAudioElement
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [\_changeCallbacks](/reference/audiocomponent/_changecallbacks.md)
 
 
@@ -70,6 +87,25 @@ boolean
 </td><td>
 
 weather the audio is used to play a background music. Defaults to false
+
+
+</td></tr>
+<tr><td>
+
+[audio](/reference/audiocomponent/audio.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+HTMLAudioElement
+
+
+</td><td>
 
 
 </td></tr>

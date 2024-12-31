@@ -365,6 +365,18 @@ Description
 </td></tr>
 <tr><td>
 
+[getBone(id)](/reference/avatarcomponent/getbone.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [getDimensions()](/reference/avatarcomponent/getdimensions.md)
 
 
@@ -415,6 +427,18 @@ Description
 </td></tr>
 <tr><td>
 
+[onMixerUpdate(f)](/reference/avatarcomponent/onmixerupdate.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [play(name, opts)](/reference/avatarcomponent/play.md)
 
 
@@ -428,6 +452,18 @@ Description
 <tr><td>
 
 [stop(name, opts)](/reference/avatarcomponent/stop.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[stopAll()](/reference/avatarcomponent/stopall.md)
 
 
 </td><td>

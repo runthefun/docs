@@ -85,58 +85,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[accumulator](/reference/basiccharactercontroller/accumulator.md)
-
-
-</td><td>
-
-
-</td><td>
-
-number
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[controlVelocity](/reference/basiccharactercontroller/controlvelocity.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Vector3
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[dampling](/reference/basiccharactercontroller/dampling.md)
-
-
-</td><td>
-
-
-</td><td>
-
-number
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[forces](/reference/basiccharactercontroller/forces.md)
+[\_logs](/reference/basiccharactercontroller/_logs.md)
 
 
 </td><td>
@@ -153,24 +102,7 @@ any\[\]
 </td></tr>
 <tr><td>
 
-[gravity](/reference/basiccharactercontroller/gravity.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Vector3
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[onFloor](/reference/basiccharactercontroller/onfloor.md)
+[disableEvents](/reference/basiccharactercontroller/disableevents.md)
 
 
 </td><td>
@@ -179,57 +111,6 @@ Vector3
 </td><td>
 
 boolean
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[previousVelocity](/reference/basiccharactercontroller/previousvelocity.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Vector3
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[rotation](/reference/basiccharactercontroller/rotation.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Euler
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[velocity](/reference/basiccharactercontroller/velocity.md)
-
-
-</td><td>
-
-
-</td><td>
-
-Vector3
 
 
 </td><td>
@@ -257,6 +138,18 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
+
+[\_logVec3(v)](/reference/basiccharactercontroller/_logvec3.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
 
 [\_updateCollisionState(collider, playerCollider, collision)](/reference/basiccharactercontroller/_updatecollisionstate.md)
 
@@ -306,19 +199,7 @@ Description
 </td></tr>
 <tr><td>
 
-[getCCState(object)](/reference/basiccharactercontroller/getccstate.md)
-
-
-</td><td>
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[update(object, velocity, dt)](/reference/basiccharactercontroller/update.md)
+[update(object, velocity, dt, seqId)](/reference/basiccharactercontroller/update.md)
 
 
 </td><td>

@@ -1,12 +1,9 @@
 
-## AvatarComponent.\_renderMode property
+## AvatarComponent.renderMode property
+
+Model render mode. Defaults to "default"
 
 **Signature:**
-
-```typescript
-_renderMode: any;
-```
-
 
 ```typescript
 renderMode: RenderMode;

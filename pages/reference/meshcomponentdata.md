@@ -130,6 +130,44 @@ _(Optional)_ if not provided, an auto id will be generated
 </td></tr>
 <tr><td>
 
+[image?](/reference/meshcomponentdata/image.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Image
+
+
+</td><td>
+
+_(Optional)_ Color of the mesh. Defaults to "\#ff0000"
+
+
+</td></tr>
+<tr><td>
+
+[material?](/reference/meshcomponentdata/material.md)
+
+
+</td><td>
+
+
+</td><td>
+
+MaterialData
+
+
+</td><td>
+
+_(Optional)_ Material of the mesh.
+
+
+</td></tr>
+<tr><td>
+
 [name?](/reference/meshcomponentdata/name.md)
 
 
@@ -195,7 +233,7 @@ _(Optional)_ Position of the component in the space. Defaults to {<!-- -->x: 0, 
 
 </td><td>
 
-"wireframe" \| "dome" \| 'default'
+"wireframe" \| "dome" \| "default"
 
 
 </td><td>

@@ -6,7 +6,7 @@ listen to state events, this is fired whenever the client receives a state updat
 **Signature:**
 
 ```typescript
-onState(listener: () => void): () => void;
+onState(listener: (state: S) => void): () => void;
 ```
 
 ## Parameters
@@ -34,7 +34,7 @@ listener
 
 </td><td>
 
-() =&gt; void
+(state: S) =&gt; void
 
 
 </td><td>

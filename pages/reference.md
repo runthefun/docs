@@ -16,6 +16,16 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[$Param](/reference/_param.md)
+
+
+</td><td>
+
+
+
+</td></tr>
+<tr><td>
+
 [AudioComponent](/reference/audiocomponent.md)
 
 
@@ -105,6 +115,15 @@ A Game client instance is used to join a game room on the server
 </td></tr>
 <tr><td>
 
+[ClientProvider](/reference/clientprovider.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [CloudComponent](/reference/cloudcomponent.md)
 
 
@@ -170,7 +189,7 @@ Use this to create controls for your game, Currently supports the following type
 
 - [FlyCameraControlsWrapper](/reference/flycameracontrolswrapper.md) for a fly camera movement
 
--  for a WASD + Space type of navigation
+- [DefaultControlsWrapper](/reference/defaultcontrolswrapper.md) for a WASD + Space type of navigation
 
 
 </td></tr>
@@ -188,6 +207,27 @@ Orbit - left mouse / touch: one-finger move
 Zoom - middle mouse, or mousewheel / touch: two-finger spread or squish
 
 Pan - right mouse, or left mouse + ctrl/meta/shiftKey, or arrow keys / touch: two-finger move
+
+
+</td></tr>
+<tr><td>
+
+[DefaultControlsWrapper](/reference/defaultcontrolswrapper.md)
+
+
+</td><td>
+
+This class implements the default platformer controls, with support for jumping, running, etc
+
+the controls use keyboard keys W, A, S, D or Arrow keys for movement, and SPACE for jumping;
+
+The meaning of `object` &amp; `target` options is intepreted as follows:
+
+- The `object` is moved by the controls actions
+
+- The `target` is used to determine the forward direction of the movement
+
+The behavior of the controls can be customized using the params object. See [DefaultControlParams](/reference/defaultcontrolparams.md) for more info
 
 
 </td></tr>
@@ -575,6 +615,26 @@ This is a singleton component. You can only have one reflector in the game. For 
 </td></tr>
 <tr><td>
 
+[SignalAction](/reference/signalaction.md)
+
+
+</td><td>
+
+
+
+</td></tr>
+<tr><td>
+
+[SignalEmitter](/reference/signalemitter.md)
+
+
+</td><td>
+
+
+
+</td></tr>
+<tr><td>
+
 [Space](/reference/space.md)
 
 
@@ -695,17 +755,6 @@ See [WaveComponentData](/reference/wavecomponentdata.md) for the data schema use
 </td></tr>
 <tr><td>
 
-[Web3Api](/reference/web3api.md)
-
-
-</td><td>
-
-Class representing Web3 functionalities.
-
-
-</td></tr>
-<tr><td>
-
 [WindComponent](/reference/windcomponent.md)
 
 
@@ -772,6 +821,42 @@ Use this decorator to group multiple params into one folder
 </td></tr>
 <tr><td>
 
+[getParam(key, value, decl)](/reference/getparam.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[getParams(instance, autoCreate)](/reference/getparams.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[getRpcMethods(target)](/reference/getrpcmethods.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[Message()](/reference/message.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [Param(options)](/reference/param.md)
 
 
@@ -812,12 +897,30 @@ The `@Receiver` decorator allows functions to be bound to other component's sign
 </td></tr>
 <tr><td>
 
+[Rpc(opts)](/reference/rpc.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [seconds(secs)](/reference/seconds.md)
 
 
 </td><td>
 
 Returns a promise that resolves after a number of seconds has passed
+
+
+</td></tr>
+<tr><td>
+
+[ServerOnly()](/reference/serveronly.md)
+
+
+</td><td>
 
 
 </td></tr>
@@ -877,7 +980,52 @@ Description
 </td></tr>
 <tr><td>
 
+[Ai](/reference/ai.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[AiEmbedOptions](/reference/aiembedoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[AiGenOptions](/reference/aigenoptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[AiTool](/reference/aitool.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [AnimationParam](/reference/animationparam.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ArrayParam](/reference/arrayparam.md)
 
 
 </td><td>
@@ -1085,12 +1233,39 @@ See [CylinderGeometry](https://threejs.org/docs/#api/en/geometries/CylinderGeome
 </td></tr>
 <tr><td>
 
+[DefaultControlParams](/reference/defaultcontrolparams.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [DustComponentData](/reference/dustcomponentdata.md)
 
 
 </td><td>
 
 Data specification for [DustComponent](/reference/dustcomponent.md)<!-- -->, see [ComponentManager.create()](/reference/componentmanager/create.md) on how to create a component
+
+
+</td></tr>
+<tr><td>
+
+[Folder](/reference/folder.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[FolderData](/reference/folderdata.md)
+
+
+</td><td>
 
 
 </td></tr>
@@ -1160,6 +1335,15 @@ Data specification for [MagneticFieldComponent](/reference/magneticfieldcomponen
 </td></tr>
 <tr><td>
 
+[MapParam](/reference/mapparam.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [MeshComponentData](/reference/meshcomponentdata.md)
 
 
@@ -1194,6 +1378,15 @@ Data specification for [ModelComponent](/reference/modelcomponent.md)<!-- -->, s
 <tr><td>
 
 [NumberParam](/reference/numberparam.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[ParamDecl](/reference/paramdecl.md)
 
 
 </td><td>
@@ -1318,6 +1511,15 @@ Data specification for [PlatformComponent](/reference/platformcomponent.md)<!-- 
 </td></tr>
 <tr><td>
 
+[ReceiverParam](/reference/receiverparam.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [ResourceData](/reference/resourcedata.md)
 
 
@@ -1333,6 +1535,24 @@ Data specification for [PlatformComponent](/reference/platformcomponent.md)<!-- 
 </td><td>
 
 Resource Params need to be initialized using $Param.Resource
+
+
+</td></tr>
+<tr><td>
+
+[Rpc](/reference/rpc.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[RpcOptions](/reference/rpcoptions.md)
+
+
+</td><td>
 
 
 </td></tr>
@@ -1367,7 +1587,25 @@ Attach an identifier or a tag to a component, so that it can be easily accessed 
 </td></tr>
 <tr><td>
 
+[ServerApi](/reference/serverapi.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [SignalOptions](/reference/signaloptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[SignalParam](/reference/signalparam.md)
 
 
 </td><td>
@@ -1398,6 +1636,15 @@ See [SphereGeometry](https://threejs.org/docs/#api/en/geometries/SphereGeometry)
 </td></tr>
 <tr><td>
 
+[Tagged](/reference/tagged.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [TextComponentData](/reference/textcomponentdata.md)
 
 
@@ -1419,6 +1666,24 @@ Data specification for [TextComponent](/reference/textcomponent.md)<!-- -->, see
 <tr><td>
 
 [TriggerOptions](/reference/triggeroptions.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[TriggerParam](/reference/triggerparam.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[UnionParam](/reference/unionparam.md)
 
 
 </td><td>
@@ -1467,16 +1732,6 @@ Data specification for [WaveComponent](/reference/wavecomponent.md)<!-- -->, see
 </td></tr>
 <tr><td>
 
-[Web3Api](/reference/web3api.md)
-
-
-</td><td>
-
-
-
-</td></tr>
-<tr><td>
-
 [WindComponentData](/reference/windcomponentdata.md)
 
 
@@ -1514,6 +1769,15 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[Folder](/reference/folder.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [Materials](/reference/materials.md)
 
 
@@ -1524,6 +1788,15 @@ Description
 <tr><td>
 
 [Plugins](/reference/plugins.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[Rpc](/reference/rpc.md)
 
 
 </td><td>
@@ -1556,11 +1829,10 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[$Param](/reference/_param.md)
+[Ai](/reference/ai.md)
 
 
 </td><td>
-
 
 
 </td></tr>
@@ -1570,6 +1842,16 @@ Description
 
 
 </td><td>
+
+
+</td></tr>
+<tr><td>
+
+[Bones](/reference/bones.md)
+
+
+</td><td>
+
 
 
 </td></tr>
@@ -1683,12 +1965,30 @@ A Game client instance is used to join a game room on the server
 </td></tr>
 <tr><td>
 
+[GameServer](/reference/gameserver.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [GameStorage](/reference/gamestorage.md)
 
 
 </td><td>
 
 The GameStorage instance is used to store and retrieve data from the game storage.
+
+
+</td></tr>
+<tr><td>
+
+[IS\_PARAM\_VAL](/reference/is_param_val.md)
+
+
+</td><td>
 
 
 </td></tr>
@@ -1765,6 +2065,25 @@ Gives access to all player entities on the game; cd  for more info
 </td></tr>
 <tr><td>
 
+[ResourceLoader](/reference/resourceloader.md)
+
+
+</td><td>
+
+
+
+</td></tr>
+<tr><td>
+
+[RPC\_KEY](/reference/rpc_key.md)
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [SHARED](/reference/shared.md)
 
 
@@ -1830,6 +2149,16 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[Bone](/reference/bone.md)
+
+
+</td><td>
+
+
+
+</td></tr>
+<tr><td>
+
 [ColliderType](/reference/collidertype.md)
 
 
@@ -1840,16 +2169,6 @@ Description
 <tr><td>
 
 [ComponentTypes](/reference/componenttypes.md)
-
-
-</td><td>
-
-
-
-</td></tr>
-<tr><td>
-
-[ContractOf](/reference/contractof.md)
 
 
 </td><td>

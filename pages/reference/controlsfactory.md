@@ -13,7 +13,7 @@ Use this to create controls for your game, Currently supports the following type
 
 - [FlyCameraControlsWrapper](/reference/flycameracontrolswrapper.md) for a fly camera movement
 
--  for a WASD + Space type of navigation
+- [DefaultControlsWrapper](/reference/defaultcontrolswrapper.md) for a WASD + Space type of navigation
 
 **Signature:**
 

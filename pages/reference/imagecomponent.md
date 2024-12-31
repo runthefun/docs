@@ -60,6 +60,40 @@ Description
 </td></tr>
 <tr><td>
 
+[magFilter](/reference/imagecomponent/magfilter.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[minFilter](/reference/imagecomponent/minfilter.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [opacity](/reference/imagecomponent/opacity.md)
 
 
@@ -74,6 +108,23 @@ number
 </td><td>
 
 \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\* Public API \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
+
+
+</td></tr>
+<tr><td>
+
+[useMipMap](/reference/imagecomponent/usemipmap.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
 
 
 </td></tr>

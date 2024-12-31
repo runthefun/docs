@@ -42,6 +42,25 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[\_dataTemplate](/reference/playerwrapper/_datatemplate.md)
+
+
+</td><td>
+
+`static`
+
+
+</td><td>
+
+any
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [avatar](/reference/playerwrapper/avatar.md)
 
 

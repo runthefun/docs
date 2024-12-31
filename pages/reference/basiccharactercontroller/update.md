@@ -4,7 +4,7 @@
 **Signature:**
 
 ```typescript
-update(object: Component3D, velocity: Vector3, dt: number): CCObjectState;
+update(object: Component3D, velocity: Vector3, dt: number, seqId: number): CCObjectState;
 ```
 
 ## Parameters
@@ -56,6 +56,20 @@ Vector3
 <tr><td>
 
 dt
+
+
+</td><td>
+
+number
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+seqId
 
 
 </td><td>

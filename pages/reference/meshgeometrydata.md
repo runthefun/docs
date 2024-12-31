@@ -99,7 +99,7 @@ Params for the Sphere geometry
 
 </td><td>
 
-"box" \| "sphere" \| "cylinder" \| "dome"
+"plane" \| "box" \| "sphere" \| "cylinder" \| "dome"
 
 
 </td><td>

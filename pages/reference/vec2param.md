@@ -4,9 +4,9 @@
 **Signature:**
 
 ```typescript
-export interface Vec2Param extends AbstractParam 
+export interface Vec2Param extends AbstractParam<XY> 
 ```
-**Extends:** [AbstractParam](/reference/abstractparam.md)
+**Extends:** [AbstractParam](/reference/abstractparam.md)<!-- -->&lt;XY&gt;
 
 ## Properties
 
@@ -32,25 +32,6 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
-
-[defaultValue?](/reference/vec2param/defaultvalue.md)
-
-
-</td><td>
-
-
-</td><td>
-
-{ x: number; y: number; }
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
 
 [type?](/reference/vec2param/type.md)
 

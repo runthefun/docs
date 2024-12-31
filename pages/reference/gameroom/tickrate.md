@@ -1,7 +1,7 @@
 
 ## GameRoom.tickRate property
 
-Returns the tick rate of the server, this is the number of times the server sends a state update per second
+Returns the tick rate of the server, this is the fps of the simulation loop on the serve
 
 **Signature:**
 

@@ -4,7 +4,7 @@
 **Signature:**
 
 ```typescript
-getBehavior<T extends ScriptBehavior>(type: (...args: any) => T): T;
+getBehavior<T extends ScriptBehavior>(type: new (...args: any) => T): T;
 ```
 
 ## Parameters
@@ -32,7 +32,7 @@ type
 
 </td><td>
 
-(...args: any) =&gt; T
+new (...args: any) =&gt; T
 
 
 </td><td>

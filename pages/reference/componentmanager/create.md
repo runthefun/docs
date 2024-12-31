@@ -10,6 +10,7 @@ create<T extends CType>(data: CreateComponentArg<T>, opts?: {
         abort?: AbortSignal;
         transient?: boolean;
         parent?: Object3D;
+        sessionId?: string;
     }): Promise<ComponentTypeMap[T]>;
 ```
 
@@ -52,7 +53,7 @@ opts
 
 </td><td>
 
-{ abort?: AbortSignal; transient?: boolean; parent?: Object3D; }
+{ abort?: AbortSignal; transient?: boolean; parent?: Object3D; sessionId?: string; }
 
 
 </td><td>

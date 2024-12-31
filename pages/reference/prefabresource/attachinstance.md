@@ -1,10 +1,10 @@
 
-## PrefabResource.\_attachInstance() method
+## PrefabResource.attachInstance() method
 
 **Signature:**
 
 ```typescript
-_attachInstance(instance: Component3D): void;
+attachInstance(instance: Component3D): void;
 ```
 
 ## Parameters
@@ -43,4 +43,6 @@ instance
 **Returns:**
 
 void
+
+
 

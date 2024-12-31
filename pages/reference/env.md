@@ -8,5 +8,6 @@ Provides access to the current script execution environment
 ```typescript
 Env: {
     readonly editMode: boolean;
+    readonly isServer: boolean;
 }
 ```

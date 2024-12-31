@@ -23,3 +23,5 @@ the params depend on the type of controls:
 
 - For "fly", no params are required for now
 
+- For "default", see [DefaultControlParams](/reference/defaultcontrolparams.md) constructor
+

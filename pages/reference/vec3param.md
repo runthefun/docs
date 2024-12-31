@@ -4,9 +4,9 @@
 **Signature:**
 
 ```typescript
-export interface Vec3Param extends AbstractParam 
+export interface Vec3Param extends AbstractParam<XYZ> 
 ```
-**Extends:** [AbstractParam](/reference/abstractparam.md)
+**Extends:** [AbstractParam](/reference/abstractparam.md)<!-- -->&lt;XYZ&gt;
 
 ## Properties
 
@@ -32,25 +32,6 @@ Description
 
 </th></tr></thead>
 <tbody><tr><td>
-
-[defaultValue?](/reference/vec3param/defaultvalue.md)
-
-
-</td><td>
-
-
-</td><td>
-
-{ x: number; y: number; z: number; }
-
-
-</td><td>
-
-_(Optional)_
-
-
-</td></tr>
-<tr><td>
 
 [type?](/reference/vec3param/type.md)
 

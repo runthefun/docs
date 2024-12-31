@@ -81,6 +81,25 @@ Returns the current camera in the scene. cf [MainCamera](/reference/maincamera.m
 </td></tr>
 <tr><td>
 
+[isReady](/reference/space/isready.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [options](/reference/space/options.md)
 
 
@@ -89,7 +108,7 @@ Returns the current camera in the scene. cf [MainCamera](/reference/maincamera.m
 
 </td><td>
 
-{ game: import("..").Game; externalApi: any; disableScripts?: boolean; signals?: import("..").GameSignals; loadOpts?: { looseMode?: boolean; }; }
+{ game: import("..").Game; externalApi: any; server?: import("../@types/states").Server; disableScripts?: boolean; signals?: import("..").GameSignals; loadOpts?: { looseMode?: boolean; }; }
 
 
 </td><td>
@@ -150,6 +169,25 @@ ResourceManager
 </td><td>
 
  { ResourceManager } - The resources manager for the current game.
+
+
+</td></tr>
+<tr><td>
+
+[sessionId](/reference/space/sessionid.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+string
+
+
+</td><td>
 
 
 </td></tr>

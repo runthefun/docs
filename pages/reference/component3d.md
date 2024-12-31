@@ -233,6 +233,25 @@ Returns the unique identifier for this component
 </td></tr>
 <tr><td>
 
+[isBehavior](/reference/component3d/isbehavior.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [isPersistent](/reference/component3d/ispersistent.md)
 
 
@@ -409,6 +428,40 @@ Vector3
 </td><td>
 
 the scale in world space
+
+
+</td></tr>
+<tr><td>
+
+[sessionId](/reference/component3d/sessionid.md)
+
+
+</td><td>
+
+
+</td><td>
+
+string
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[space](/reference/component3d/space.md)
+
+
+</td><td>
+
+
+</td><td>
+
+[Space](/reference/space.md)
+
+
+</td><td>
 
 
 </td></tr>
@@ -696,6 +749,18 @@ Event fired when this component stops intersecting a sensor
 </td><td>
 
 This event is fired each frame between the start and end of a sensor intersection
+
+
+</td></tr>
+<tr><td>
+
+[updateData(data)](/reference/component3d/updatedata.md)
+
+
+</td><td>
+
+
+</td><td>
 
 
 </td></tr>

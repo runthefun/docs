@@ -4,9 +4,9 @@
 **Signature:**
 
 ```typescript
-export interface StringParam extends AbstractParam 
+export interface StringParam extends AbstractParam<string> 
 ```
-**Extends:** [AbstractParam](/reference/abstractparam.md)
+**Extends:** [AbstractParam](/reference/abstractparam.md)<!-- -->&lt;string&gt;
 
 ## Properties
 
@@ -33,7 +33,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[defaultValue?](/reference/stringparam/defaultvalue.md)
+[isSecret?](/reference/stringparam/issecret.md)
 
 
 </td><td>
@@ -41,7 +41,7 @@ Description
 
 </td><td>
 
-string
+boolean
 
 
 </td><td>

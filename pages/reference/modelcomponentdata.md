@@ -92,6 +92,25 @@ _(Optional)_ Enable real time shadows for this model. Defaults to false
 </td></tr>
 <tr><td>
 
+[forceUnique?](/reference/modelcomponentdata/forceunique.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+_(Optional)_ Force the model to not be instanced. Defaults to false
+
+
+</td></tr>
+<tr><td>
+
 [id?](/reference/modelcomponentdata/id.md)
 
 

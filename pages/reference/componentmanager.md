@@ -39,6 +39,25 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+[\_isLoading](/reference/componentmanager/_isloading.md)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+some scripts still use this
+
+
+</td></tr>
+<tr><td>
+
 [components](/reference/componentmanager/components.md)
 
 

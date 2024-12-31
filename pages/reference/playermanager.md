@@ -92,3 +92,35 @@ A record containing all the current players connected to the game
 
 </td></tr>
 </tbody></table>
+
+## Methods
+
+<table><thead><tr><th>
+
+Method
+
+
+</th><th>
+
+Modifiers
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[get(avatarOrSessionId)](/reference/playermanager/get.md)
+
+
+</td><td>
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

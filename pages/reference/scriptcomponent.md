@@ -258,6 +258,34 @@ Handles the sensor stay event for the host component
 </td></tr>
 <tr><td>
 
+[onAttached()](/reference/scriptcomponent/onattached.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Invoked when the component is attached to a parent
+
+
+</td></tr>
+<tr><td>
+
+[onChildrenLoaded(children)](/reference/scriptcomponent/onchildrenloaded.md)
+
+
+</td><td>
+
+
+</td><td>
+
+Invoked when all children of the host component are loaded
+
+
+</td></tr>
+<tr><td>
+
 [onDispose()](/reference/scriptcomponent/ondispose.md)
 
 
@@ -356,7 +384,7 @@ Invoked at regular intervals when the game is running. Use this when writing cus
 </td></tr>
 <tr><td>
 
-[onFrame()](/reference/scriptcomponent/onframe.md)
+[onFrame(dt)](/reference/scriptcomponent/onframe.md)
 
 
 </td><td>
@@ -379,6 +407,18 @@ Invoked each frame even if the game isnt running
 </td><td>
 
 Invoked when the host component is asked for its collision mesh (if any)
+
+
+</td></tr>
+<tr><td>
+
+[onGetGui()](/reference/scriptcomponent/ongetgui.md)
+
+
+</td><td>
+
+
+</td><td>
 
 
 </td></tr>

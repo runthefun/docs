@@ -41,7 +41,24 @@ Description
 
 </td><td>
 
-MapSchema&lt;[PlayerData](/reference/playerdata.md)<!-- -->&gt;
+MapSchema&lt;PlayerData&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[settings](/reference/baseroomstate/settings.md)
+
+
+</td><td>
+
+
+</td><td>
+
+{ tickRate: number; patchRate: number; reconnectTimeout: number; }
 
 
 </td><td>

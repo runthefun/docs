@@ -1,24 +1,17 @@
 
-## Folder() function
-
-Use this decorator to group multiple params into one folder
+## Folder namespace
 
 **Signature:**
 
 ```typescript
-export declare function Folder(label: string, opts?: any): (target: any, key: any) => void;
+export declare namespace Folder 
 ```
 
-## Parameters
+## Functions
 
 <table><thead><tr><th>
 
-Parameter
-
-
-</th><th>
-
-Type
+Function
 
 
 </th><th>
@@ -29,12 +22,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-label
-
-
-</td><td>
-
-string
+[Down()](/reference/folder/down.md)
 
 
 </td><td>
@@ -43,22 +31,11 @@ string
 </td></tr>
 <tr><td>
 
-opts
+[Up()](/reference/folder/up.md)
 
 
 </td><td>
-
-any
-
-
-</td><td>
-
-_(Optional)_
 
 
 </td></tr>
 </tbody></table>
-**Returns:**
-
-(target: any, key: any) =&gt; void
-

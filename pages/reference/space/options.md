@@ -7,6 +7,7 @@
 options: {
         game: import("..").Game;
         externalApi: any;
+        server?: import("../@types/states").Server;
         disableScripts?: boolean;
         signals?: import("..").GameSignals;
         loadOpts?: {

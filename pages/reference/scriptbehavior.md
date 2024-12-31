@@ -50,4 +50,23 @@ T
 
 
 </td></tr>
+<tr><td>
+
+[isBehavior](/reference/scriptbehavior/isbehavior.md)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
 </tbody></table>
