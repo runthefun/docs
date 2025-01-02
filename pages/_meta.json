@@ -1,5 +1,5 @@
 {
-    "index": "Ask AI",
+    "index": "Quickstart",
     "welcome": "Welcome",
     "guides": "Guides",
     "lifecycle": "Scripts Lifecycle",
@@ -19,5 +19,6 @@
     },
     "reference": {
         "title": "API Reference"
-    }
+    },
+    "ai": "AI Chatbot"
 }

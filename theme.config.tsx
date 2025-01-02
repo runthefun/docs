@@ -3,12 +3,12 @@ import { DocsThemeConfig } from "nextra-theme-docs";
 import { useRouter } from "next/router";
 
 const config: DocsThemeConfig = {
-    logo: <img style={{ width: "100px" }} src="/logo.png" />,
+    logo: <img style={{ width: "100px" }} src="/awe.png" />,
     project: {
-        link: "https://github.com/oncyberio",
+        link: "https://github.com/runthefun",
     },
     chat: {
-        link: "https://discord.gg/NCuAWD4FCz",
+        link: "https://discord.gg/oncyber",
     },
     // docsRepositoryBase: "https://v2.oncyber.io",
     head: () => (
@@ -27,7 +27,7 @@ const config: DocsThemeConfig = {
         const { asPath } = useRouter();
         if (asPath !== "/") {
             return {
-                titleTemplate: "%s – V2.ONCYBER",
+                titleTemplate: "%s – AWE",
             };
         }
     },

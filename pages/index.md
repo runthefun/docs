@@ -1,20 +1,18 @@
-# oncyber V2 Quick Start Guide
+# Ready to build new worlds in awe? LFG:
 
-Ready to build new worlds in oncyber V2? LFG:
+#### **Creating a New World in awe**
 
-#### **Creating a New World in oncyber V2**
-
-* Go to [v2.oncyber.io](https://v2.oncyber.io/) and log in.  
-  * Haven’t signed up for V2 yet?  
+* Go to [awe.box](https://awe.box/studio) and log in.  
+  * Haven’t signed up for AWE yet?  
     * If you don’t have an existing oncyber account, create one above.  
-    * [Fill out this form](https://oncyber.typeform.com/V2earlyaccess) to be added to V2’s waitlist.  
-    * For accelerated access, [stop by Discord](https://discord.gg/NCuAWD4FCz) and let us know that you’ve signed up and you’re ready to build in V2\!  
+    * [Fill out this form](https://oncyber.typeform.com/V2earlyaccess) to be added to awe’s waitlist.  
+    * For accelerated access, [stop by Discord](https://discord.gg/NCuAWD4FCz) and let us know that you’ve signed up and you’re ready to build in awe\!  
 * Click “**WORLDS**” in the top-left, then “**Create from Scratch**” in the slide-out menu.  
-* This will open a new world template in V2’s Studio interface at [v2.oncyber.io/studio](https://v2.oncyber.io/studio).
+* This will open a new world template in awe’s Studio interface at [awe.box/studio](https://awe.box/studio).
 
 #### **Basic Studio Navigation**
 
-oncyber’s V2 Studio uses a combination of mouse and keyboard inputs for navigation:
+awe's Studio uses a combination of mouse and keyboard inputs for navigation:
 
 * **Keyboard Movement:** *Use WASD* or the *arrow keys* to move directionally, *Spacebar* to move up, and *B* to move down. *Hold down Shift on the keyboard* to move faster.  
 * **Mouse Movement:** *Click and drag the right mouse button* to move the camera more quickly in the corresponding direction.  
@@ -47,7 +45,7 @@ Tip: Your changes to these three key Parameters will be reflected as numerical v
 
 #### **Adding Functionality to Assets**
 
-Behaviors are modular pieces of visual logic that can add different types of functionality to components in your world. You can code your own, or use existing no-code blocks from V2’s library. For example:
+Behaviors are modular pieces of visual logic that can add different types of functionality to components in your world. You can code your own, or use existing no-code blocks from awe’s library. For example:
 
 * Click “**Logic**” in the left-hand column to browse prebuilt logic, then scroll down (or use the search box) to find the “**Spin**” Behavior, then click-and-drag that onto the “**Mesh**” you added into your scene. The mesh will begin to spin.
 
@@ -72,13 +70,13 @@ Together, these settings will allow your cube mesh to account for both the colli
 
 You can preview your world in its current state at any time by clicking the “▶️” icon at the top-center of Studio. This will open a preview of your world in a new tab, as it would appear to visitors.
 
-Unless coded otherwise, oncyber worlds in Live or Preview mode are navigated using the default third-person avatar controls:
+Unless coded otherwise, awe worlds in Live or Preview mode are navigated using the default third-person avatar controls:
 
 Desktop Controls:
 
 * **Keyboard:** *Use WASD* or the *arrow keys* to move directionally, press *Spacebar* to jump, and *Shift* to run.  
 * **Mouse:** The camera moves independently of the avatar, controlled by *mouse movement*, while the *mouse scroll wheel* adjusts the distance of the camera from the avatar (transitioning to a first-person perspective at max zoom). *Click actions* beyond the *Pointer Lock* depend largely on how each world has been coded.  
-* **Pointer Lock:** The Pointer Lock is a default mechanic that lets you switch between control of your mouse pointer and oncyber’s camera. To enter Pointer Lock, simply click anywhere on the screen. To exit Pointer Lock at any time, press the ESC key.   
+* **Pointer Lock:** The Pointer Lock is a default mechanic that lets you switch between control of your mouse pointer and awe's camera. To enter Pointer Lock, simply click anywhere on the screen. To exit Pointer Lock at any time, press the ESC key.   
 * **Chat:** Most worlds by default have a chat box in the lower-left corner of the screen. This can be accessed by pressing the Enter key at any time, or by exiting the Pointer Lock and clicking in the chat box area. To send messages, just type and press Enter. Please be courteous.
 
 Mobile Controls:
@@ -90,9 +88,9 @@ Mobile Controls:
 
 #### **Publishing Your World**
 
-Published worlds in V2 are functionally similar to draft worlds with a few key differences. Publishing your world allows you to:
+Published worlds in awe are functionally similar to draft worlds with a few key differences. Publishing your world allows you to:
 
-* Make your world accessible at a web-friendly permanent URL slug (ie. [v2.oncyber.io/yourworldhere](http://v2.oncyber.io/yourworldhere)).  
+* Make your world accessible at a web-friendly permanent URL slug (ie. [awe.box/yourworldhere](http://awe.box/yourworldhere)).  
 * Create rollback versioning states at each point of publication.  
 * Add a custom thumbnail, name, and description that appears when your link is shared elsewhere online.  
 * Enable the “Remix” option.
@@ -105,15 +103,15 @@ To publish your current world:
 * Click the **Trash Can icon** to delete the placeholder “Create from Scratch” thumbnail, and either upload a pre-made thumbnail of your own, or click the **Recycle icon** to auto-generate a thumbnail from where your camera is currently pointed in Studio.  
 * Click the “**Publish**” button in the lower-left corner of the screen. This will bring up a final preview and confirmation – if everything looks good, click “**Publish**” again.
 
-Congratulations\! You’ve just published your first world in oncyber V2. 
+Congratulations\! You’ve just published your first world in awe. 
 
 If you haven’t yet, [stop by Discord](https://discord.gg/NCuAWD4FCz) and let us know what you’re planning to build next.
 
 #### **(OPTIONAL) Enabling Remixes for Your World**
 
-Made something neat in V2 and want others to build off it? In the spirit of the CC0 era, oncyber’s V2 introduces a “Remix” feature that allows users to opt into making their worlds remixable. 
+Made something neat in awe and want others to build off it? In the spirit of the CC0 era, awe introduces a “Remix” feature that allows users to opt into making their worlds remixable. 
 
-**Important Note**: Enabling the “Remix” option means that any V2 user can create a copy of your world from its last auto-saved or published state. You’ll **only** want to enable this if you’re fine sharing your work with others to build from.
+**Important Note**: Enabling the “Remix” option means that any awe user can create a copy of your world from its last auto-saved or published state. You’ll **only** want to enable this if you’re fine sharing your work with others to build from.
 
 Now, ready to open the gates? To enable Remixes for your current world:
 
@@ -123,4 +121,4 @@ Now, ready to open the gates? To enable Remixes for your current world:
 
 ## Going Deeper
 
-Done with the Quick Start guide? Dive deeper into **oncyber V2** with our Scripting Deep Dive. That guide will walk you through the initial setup, show you how to create your first 3D game, and introduce you to the basics of working with our engine.
+Done with the Quick Start guide? Dive deeper into **awe** with our Scripting Deep Dive. That guide will walk you through the initial setup, show you how to create your first 3D game, and introduce you to the basics of working with our engine.
