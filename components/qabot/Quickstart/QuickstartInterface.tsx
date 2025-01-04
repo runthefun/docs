@@ -8,13 +8,13 @@ export const QuickstartInterface = ({onSelect}) => {
   
     return (
       <div className="container">
-        <h1>Welcome to v2</h1>
+        <h1>You'll be in awe</h1>
         <div className="logo">
         <video
             style={{ margin: "0 auto", padding: '1rem' }}
             width="630"
             height="300"
-            src="/intro_video.mp4"
+            src="https://res.cloudinary.com/ugc-oo-oo/video/upload/c_crop,w_1852/v1735952928/intro_video2_by1s0o.mp4"
             muted
             loop
             autoPlay
