@@ -3,7 +3,7 @@ import { DocsThemeConfig } from "nextra-theme-docs";
 import { useRouter } from "next/router";
 
 const config: DocsThemeConfig = {
-    logo: <img style={{ width: "100px" }} src="/awe.png" />,
+    logo: <img style={{ width: "140px" }} src="/awe.png" />,
     project: {
         link: "https://github.com/runthefun",
     },

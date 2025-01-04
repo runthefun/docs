@@ -1,224 +1,132 @@
-# Adding Custom UI Elements with React
+## Adding Custom UI with React
 
-oncyber uses the [React](https://react.dev/) library as the primary approach to creating a custom in-world UI for your experience.
+awe provides built-in React support for creating in-world UI elements. You can render React components in any script (Behavior, Component, etc.) using a `UI.createRenderer()`.
 
-Here's how you can render a simple React component in a [Behavior](./behaviors.md):
+### Basic Example
 
-```tsx copy {1, 3-9, 11-15, 19, 22, 26}
+```tsx copy
 import { ScriptBehavior, UI } from '@oo/scripting'
 
-const style = {
-    position: "fixed",
-    backgroundColor: "white",
-    top: "20px",
-    left: "50%",
-    transform: "translateX(-50%)",
-}
-
 function UiElement() {
-    return <div style={style}>
-        Hello, World
+  return (
+    <div style={{
+      position: "fixed",
+      backgroundColor: "white",
+      top: "20px",
+      left: "50%",
+      transform: "translateX(-50%)",
+    }}>
+      Hello, World
     </div>
+  )
 }
 
 export default class ExampleBehavior extends ScriptBehavior {
+  private renderer = UI.createRenderer();
 
-    private renderer = UI.createRenderer();
+  onReady = () => {
+    this.renderer.render(<UiElement/>);
+  }
 
-    onReady = () => {
-        this.renderer.render(<UiElement/>);
-    }
+  onDispose = () => {
+    this.renderer.unmount();
+  }
+}
+```
+- **`UI.createRenderer()`** returns a renderer that can mount a single React element.
+- Mount more elements by creating additional renderers, if needed.
 
-    onDispose = () => {
-        this.renderer.unmount();
-    }
+---
+
+## Making the UI Reactive
+
+### Option 1: Manual Re-render
+
+Keep track of your state (e.g., `count`) and call `render()` whenever it changes:
+
+```tsx copy
+import { ScriptBehavior, UI } from '@oo/scripting'
+
+export default class ManualRender extends ScriptBehavior {
+  private renderer = UI.createRenderer();
+  private count = 0;
+
+  onReady = () => this.renderUI();
+
+  renderUI = () => {
+    this.renderer.render(
+      <div style={{ position: "fixed", backgroundColor: "white", top: 20, left: "50%", transform: "translateX(-50%)" }}>
+        <div>Count: {this.count}</div>
+        <button onClick={this.increment}>Increment</button>
+      </div>
+    );
+  }
+
+  increment = () => {
+    this.count++;
+    this.renderUI();
+  }
+
+  onDispose = () => this.renderer.unmount();
 }
 ```
 
-This method can be used in other types of scripts as well -- not just Behaviors.
+### Option 2: Automatic with a Store
 
-Although a renderer can only display a single React component, you can create additional UI elements with React by creating multiple renderers.
+Use awe’s `Store` and `useStore` hooks for automatic re-renders:
 
-## Creating a Reactive UI
-
-In the prior example, our UI element is static. Although this is fine for UI elements intended as a permanent fixture (ie. a graphic HUD frame/container for other UI elements), anything variable such as a score or player health will need to be made dynamic.
-
-Creating a dynamic (or "Reactive") UI in oncyber can be approached in several ways -- next, we'll take a look at a few examples.
-
-### Manual Rerendering
-
-One approach is to manually specify a re-render for the UI each time we change a variable:
-
-```tsx copy {1, 6, 9, 12-14, 16-19, 31, 33, 41}
-import { ScriptBehavior, Param, UI } from '@oo/scripting'
-
-export default class ExampleBehavior extends ScriptBehavior {
-
-    private renderer = UI.createRenderer();
-    private count = 0;
-
-    onReady = () => {
-        this.render();
-    }
-
-    render = () => {
-        this.renderer.render(<this.ui/>);
-    };
-
-    action = () => {
-        this.count++;
-        this.render();
-    }
-
-    ui = () => {
-        return <div
-            style={{
-                position: "fixed",
-                backgroundColor: "white",
-                top: "20px",
-                left: "50%",
-                transform: "translateX(-50%)",
-            }}
-        >
-            <div> Count: {this.count} </div>
-            <button
-                onClick={this.action}
-            >
-                Button
-            </button>
-        </div>
-    }
-
-    onDispose = () => {
-        this.renderer.unmount();
-    }
-}
-```
-
-### Automatic Re-Rendering
-
-If you prefer to lean more into React's style, you can use a Store.
-
-This allows us to automate UI re-rendering by creating a Store that keeps track of some values we want displayed in our UI.
-
-In the example that follows, we'll create a Store that keeps track of our count, add a way to increment it, and have our component update when that value changes:
-
-```tsx copy {1, 3-5, 8, 10-12, 23, 25, 36-38, 41, 45, 49}
+```tsx copy
 import { ScriptBehavior, UI, Store, useStore } from '@oo/scripting'
 
-const store = new Store({
-    count: 0,
-});
+const store = new Store({ count: 0 });
 
-function Button() {
-    const { count } = useStore(store);
+function Counter() {
+  const { count } = useStore(store);
 
-    function increaseCount() {
-        store.update({ count: count+1 });
-    }
-
-    return <div
-        style={{
-            position: "fixed",
-            backgroundColor: "white",
-            top: "20px",
-            left: "50%",
-            transform: "translateX(-50%)",
-        }}
-    >
-        <div> Count: {count} </div>
-        <button
-            onClick={increaseCount}
-        >
-            Button
-        </button>
+  return (
+    <div style={{ position: "fixed", backgroundColor: "white", top: 20, left: "50%", transform: "translateX(-50%)" }}>
+      <div>Count: {count}</div>
+      <button onClick={() => store.update({ count: count+1 })}>Increment</button>
     </div>
+  )
 }
 
-export default class ExampleBehavior extends ScriptBehavior {
+export default class AutoRender extends ScriptBehavior {
+  private renderer = UI.createRenderer();
 
-    private renderer = UI.createRenderer();
+  onReady = () => {
+    this.renderer.render(<Counter/>);
+  }
 
-    get count() {
-        return store.state.count;
-    }
-
-    onReady = () => {
-        this.renderer.render(<Button/>)
-    }
-
-    onEnd = () => {
-        console.log("current count:", this.count)
-    }
-
-    onDispose = () => {
-        this.renderer.unmount()
-    }
+  onDispose = () => this.renderer.unmount();
 }
 ```
 
-For further modularity, you can also isolate and export the Store for use in your other scripts.
+#### Sharing the Store
 
-Let's say you have two scripts, A and B.
+You can export the store from one script and import it in others to keep data in sync across multiple UI components.
 
-In A, you create your Store:
-
-```tsx copy filename="A"
-import { Store } from '@oo/scripting'
-
-export const store = new Store({
-    score: 0,
-    level: 0,
-});
-
-```
-
-Next, in Script B, you import the Store from Script A:
-
-```tsx copy filename="B"
-import { store } from "./A"
-
-// read the score from the store
-const score = store.state.score;
-
-// change the state of the store
-store.update({ score: score+1 });
-
-// subscribe to updates
-const unsubscribe = store.subscribe(() => {
-    console.log("store has been updated");
-})
-
-// ...
-unsubscribe();
-```
-
-This allows you to take a more modular approach with your Store, making it independently accessible instead of tying it to another script's code.
+---
 
 ## Pointer Events
 
-It's important to disable pointer events for on-screen UI elements that are not interactive. UI elements with pointer events will prevent users from locking the mouse when clicking on a them.
+If your UI is purely visual (not interactive), disable pointer events so users can still lock the mouse in the scene:
 
-Disabling pointer events for UI elements you've created is simple -- when defining style, just add a line that sets `pointerEvents` to `none`: 
-
-```tsx copy {6}
-function Score() {
-    const { score } = useStore(store);
-    
-    return <div
-        style={{
-            pointerEvents: "none",
-            position: "fixed",
-            backgroundColor: "white",
-            fontSize: "20px"
-            top: "20px",
-            left: "50%",
-            transform: "translateX(-50%)",
-        }}
-    >
-        Score: {score}
-    </div>
-}
+```tsx copy
+<div style={{ pointerEvents: "none", ... }}>
+  {/* Non-interactive UI */}
+</div>
 ```
 
+---
 
+## Summary
+
+- **Create a Renderer** with `UI.createRenderer()`, then `render()` your React component.  
+- **Control State**:
+  - **Manual**: keep track of changes, call `render()` again.  
+  - **Store**: let React auto-update with `useStore()`.  
+- **Pointer Events**: set `pointerEvents: "none"` for non-clickable UI.  
+- **Multiple UI Elements**: create multiple renderers or combine components within one renderer.  
+
+With these steps, you can build dynamic in-world UIs in awe using React. Enjoy crafting engaging interfaces for your players!

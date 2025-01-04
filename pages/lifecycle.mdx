@@ -1,68 +1,44 @@
-# Understanding Scripting Lifecycle Methods
+## Lifecycle Overview
 
-In oncyber, Behaviors, Components, and the `main` script file can access specially named functions that we call lifecycle methods.
+In awe, **Scripts**, **Components** and **Behaviors** have special lifecycle methods that run at key moments:
 
-Here's an example of a main Game class with two of these:
-
-```ts copy filename="main" {1, 5, 6, 9, 13-16}
-import { World } from "@oo/scripting"
-
+```ts copy filename="main"
 export default class GameManager {
+  elapsedTime = 0;
+  maxGameTime = 10;
 
-    elapsedTime = 0;
-    maxGameTime = 10;
+  onStart() {
+    this.elapsedTime = 0;
+  }
 
-    onStart() {
-        this.elapsedTime = 0;
-    }
-
-    onUpdate(dt: number) {
-        this.elapsedTime += dt;
-        if(this.elapsedTime >= this.maxGameTime) {
-            World.stop()
-        }
-    }
-
+  // this is what you often hear as the game loop
+  // it will run at every frame, eg. 60fps means this runs 60 times / second
+  onUpdate(dt: number) {
+    this.elapsedTime += dt;
+  }
 }
 ```
 
-## Understanding Lifecycle Methods:
+### `onPreload()`
+Runs before asset loading; ideal for async setup or resource definitions.
 
-In the previous example, the exported class defined some specially named methods. Those are lifecycle methods.
+### `onReady()`
+Called after all assets load. Put **one-time** initializations here.
 
-Lifecycle methods are a set of predefined functions that are automatically called by the game engine at specific points during the game's execution. These methods allow you to hook into the game's lifecycle and define how your game reacts to events like starting, pausing, or ending.
+### `onStart()`
+Triggers each time the game starts. Good for resetting positions, timers, etc.
 
-## Initialization: `onPreload()`
+### `onUpdate(dt)`
+Runs every frame. `dt` is elapsed time since last frame. Handle movement, collision, and real-time logic here.
 
-This method is invoked before the game assets start loading, it's a perfect place for pre-loading operations, like setting up asset paths or initializing settings.
+### `onPause()` / `onResume()`
+- **Pause**: Stop animations/timers.  
+- **Resume**: Reactivate paused elements.
 
-You can `await` for other resources or any other async calls in this method. The engine will wait for this method to resolve before triggering the `onReady` callback.
+### `onEnd()`
+Runs when the game ends (e.g., after `World.stop()`).
 
-## Game Ready: `onReady()`
+### `onDispose()`
+The final cleanup hook after a session ends. Release or unsubscribe resources here.
 
-This method is called once all assets are loaded and the game is ready to start. Use this method for **one time** initialization code for the whole game. This could include things like creating a set of game entities that will presist accross game restarts.
-
-## Game Start: `onStart()`
-
-Code here is triggered when the game is started by the user. The state affected by this method should include anything that must be reset after a game restarts. This could include things such as the initial position of the player, the placement of the enemies, etc.
-
-## Game Update Loop: `onUpdate(dt)`
-
-This is the core of most game loops, where functions within are called repeatedly -- typically many times per second. It's where you put code that changes over time, like player movement, collision detection, or score updates.
-
-The parameter `dt` represents the time elapsed since the last frame, which helps in creating time-independent movements.
-
-## Pausing and Resuming: `onPause()` and `onResume()`
-
-* `onPause()`: Invoked when the game is paused (when a player opens a menu, for instance). Use this to halt animations or timers, pause the audio, etc -- anything that logically shouldn't be expected to continue when a game is paused.
-* `onResume()`: Called when the game resumes from a paused state. This is typically used for reactivating paused elements.
-
-## Game End: `onEnd()`
-
-This method is called when the game ends. In the previous example, we saw how to end the game after a fixed number of seconds by calling [`World.stop()`](../../../../reference/space/stop/).
-
-## Cleanup: `onDispose()`
-
-This last lifecycle method is used after the game ends, when it's about to be reset. This is typically used for final cleanup, like releasing resources or unsubscribing from events.
-
-Understanding and effectively using these lifecycle methods is crucial in controlling the flow of your game and ensuring a smooth and responsive experience. In the following sections, we will delve into more specific features and capabilities of the oncyber Studio scripting environment.
+Use these methods to manage your game’s flow and keep logic organized and responsive.

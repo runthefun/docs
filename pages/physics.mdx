@@ -1,85 +1,67 @@
-# Working with Physics
+## Working with Physics
 
-When adding Components in the Studio like models or avatars, you need to attach a Collider in order for collisions to work on them.
+When you add models or avatars in the Studio, you must attach a Collider for collisions. [This section](./guides/getting_started.mdx#collectible-coins) shows how.
 
-[This section](./guides/getting_started.mdx#collectible-coins) of the Getting Started tutorial explains how to attach a Collider on the Studio.
+awe uses [Rapier](https://rapier.rs/docs/), a fast Rust-based physics engine. Collider settings in the Studio mirror Rapier’s options:
 
-As noted previously, Physics and collisions in oncyber are handled via the [Rapier](https://rapier.rs/docs/) library. Rapier is a fast physics engine written using the Rust programming language.
+- **Fixed:** Ideal for static objects (walls, floors).  
+- **Dynamic:** Objects that respond to full physics (rolling balls).  
+- **Kinematic:** Objects moved only by code (moving platforms).  
 
-The settings of the Collider section in the Studio largely mirror the ones used by Rapier. Rigid Bodies can be Fixed, Dynamic, or Kinematic:
+> **Tip:** Use predefined shapes (Cube, Sphere, etc.) instead of full Mesh colliders for faster performance.
 
-- **Fixed:** for colliders that don't move or rotate (ie. walls, floors, and other static environmental objects)
-- **Dynamic:** for rigidbodies that you want to be affected dynamically by the full physics system and pushed around (ie. a moving ball -- keep in mind this is the most performance-heavy option and should be used sparingly)
-- **Kinematic:** for colliders that can only be moved programmatically by code -- these are not affected by gravity and cannot be pushed by other forces (ie. a moving platform with a set path)
+### Collider as a Sensor
 
-For the Collider type, you can either choose a basic predefined shape (Cube, Sphere, etc), or use the model's actual mesh as the Collider.
+Sensors don’t block movement but still fire collision events. Use them for things like pickups or damage zones.
 
-> Tip: When possible, opt for one of the predefined shapes instead of Mesh for the Collider type, as this will make the physics simulations much faster and more performant.
-
-Colliders can also be Sensors. Unlike standard Colliders, Sensors do not physically block the player or other objects from passing through them -- however, you can still receive collision events from them.
-
-A standard Collider is typically used for an object like an obstacle or terrain that you don't want the player to pass through, whereas a Sensor Collider would be used for an object that _needs_ to pass through the player -- a coin pickup, for example, or a damage area.
-
-To access the created the Rapier entities for a Component, you can use the [`rigidBody`](./reference/component3d/rigidbody/) property of the Component. From there you can get the Rapier `rigidBody` and the Collider:
+### Accessing Rapier Entities
 
 ```ts copy
 const myComponent = Components.byId("component-id");
+const rigidBody = myComponent.rigidBody;
+const collider = myComponent.collider;
 
-// Get our RigidBody wrapper
-const rigidBody = myComponent.rigidBody
-
-// Get the component collider
-const collider = myComponent.collider
-
-// Get the rapier rigidBody object
-const rigidBodyRapier = myComponent.collider.rigidBody
-
-// Get all the rapier colliders
-const colliders = myComponent.rigidBody.colliders
+const rapierRb = myComponent.collider.rigidBody;
+const allColliders = myComponent.rigidBody.colliders;
 ```
 
-For more information on how to use Rapier objects, see the [Collider](./reference/collider.md) and [Rigid Body](./reference/rigidbodywrapper.md) reference pages.
+Check the [Collider](./reference/collider.md) and [Rigid Body](./reference/rigidbodywrapper.md) docs for deeper details, or see Rapier’s own [Rigid Bodies](https://rapier.rs/docs/user_guides/javascript/rigid_bodies) and [Colliders](https://rapier.rs/docs/user_guides/javascript/colliders).
 
-If you want to take an even deeper dive on how all of this works, you can visit Rapier's documentation for [Rigid Bodies](https://rapier.rs/docs/user\_guides/javascript/rigid\_bodies) and [Colliders](https://rapier.rs/docs/user\_guides/javascript/colliders).
+---
 
 ## Manually Listening for Collision Events
-
-The following code shows how to listen for Collision Events:
 
 ```ts copy
 const myComponent = Components.byId("component-id");
 
 const unsubscribe = myComponent.onCollisionEnter((collision) => {
-    console.log("new collision", collision.me, collision.other, collision)
-})
+    console.log("new collision", collision)
+});
 
 // ...
 
-unsubscribe()
+unsubscribe(); // stops listening
 ```
 
-This function will be called when an object enters a Collison zone with our Component.
-
-Using `onCollisionExit` you can detect when an object is not colliding anymore with it.
-
-`onCollisionStay` is called every frame between both events.
-
-When one of the two colliding objects is a Sensor, we need to use `onSenserEnter` instead. For example: 
+- **onCollisionEnter**: Called when two objects start colliding.  
+- **onCollisionStay**: Called every frame while they remain in contact.  
+- **onCollisionExit**: Called when they stop colliding.  
+- **onSensorEnter / onSensorStay / onSensorExit**: Same pattern, but for Sensors.
 
 ```ts copy
-const myComponent = Components.byId("component-id");
-
-myComponent.onCollisionEnter(() => console.log("collision enter"))
-myComponent.onCollisionStay(() => console.log("is colliding"))
-myComponent.onCollisionExit(() => console.log("collision exit"))
-myComponent.onSensorEnter(() => console.log("sensor enter"))
-myComponent.onSensorStay(() => console.log("in sensor"))
-myComponent.onSensorExit(() => console.log("sensor exit"))
+myComponent.onCollisionEnter(() => console.log("collision enter"));
+myComponent.onCollisionStay(() => console.log("collision stay"));
+myComponent.onCollisionExit(() => console.log("collision exit"));
+myComponent.onSensorEnter(() => console.log("sensor enter"));
+myComponent.onSensorStay(() => console.log("sensor stay"));
+myComponent.onSensorExit(() => console.log("sensor exit"));
 ```
+
+---
 
 ## Physics for Behaviors and Components
 
-If you're working on the script for a Component or Behavior, you have access to special methods that work with physics directly:
+Scripted Behaviors or Components have direct access to physics methods:
 
 ```ts {5, 6, 7, 10-12, 14-16, 18-20, 22-24, 26-28, 30-32} copy
 import { ScriptBehavior } from '@oo/scripting'
@@ -87,8 +69,8 @@ import { ScriptBehavior } from '@oo/scripting'
 export default class ExampleBehavior extends ScriptBehavior {
 
     onReady = () => {
-        const collider = this.host.collider // for components this.collider
-        const rigidBody = this.host.rigidBody // for components this.rigidBody
+        const collider = this.host.collider // for Components: this.collider
+        const rigidBody = this.host.rigidBody // for Components: this.rigidBody
     }
 
     handleCollisionEnter = (collision) => {
@@ -117,3 +99,4 @@ export default class ExampleBehavior extends ScriptBehavior {
 }
 ```
 
+Use these lifecycle methods to customize object interactions in your awe world.

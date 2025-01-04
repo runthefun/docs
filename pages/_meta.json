@@ -1,24 +1,20 @@
 {
-    "index": "Start Here",
-    "welcome": "Welcome",
-    "guides": "Guides",
-    "lifecycle": "Scripts Lifecycle",
-    "components_guide": "Using Components",
-    "animations": "Playing Animations",
+    "index": "Start",
+    "lifecycle": "Script Lifecycle",
+    "components": "Components",
     "behaviors": "Behaviors",
-    "components": "Custom Components",
-    "controls": "Controls",
-    "prefabs": "Prefabs And Groups",
+    "animations": "Animations",
     "physics": "Working With Physics",
-    "ui": "Rendering UI",
     "multiplayer": "Multiplayer",
-    "custom_server": "Custom Server",
+    "prefabs": "Prefabs And Groups",
+    "ui": "User Interface (JSX)",
     "environment": "Builtin Libraries",
+    "guides": "Guides",
     "---": {
         "type": "separator"
     },
     "reference": {
         "title": "API Reference"
     },
-    "ai": "AI Chatbot"
+    "ai": "👽 AI Chatbot"
 }

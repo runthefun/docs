@@ -1,82 +1,119 @@
+# Multiplayer Overview (Simplified)
 
-# Multiplayer (Alpha)
+awe takes care of running your server logic behind the scenes, spinning up secure virtual machines so you can experiment freely without worrying about infrastructure. You write your multiplayer code in scripts; we’ll handle the rest.
 
-## Introduction
+---
 
-By default, every new game created with our engine starts in multiplayer mode. You can disable this feature by disabling the multiplayer option in the space's settings, or by removing the Multiplayer Component from your scene in the World Items list:
+## 1. Server & Client Basics
 
-![multiplayer](../public/multiplayer.png)
+### Server-Only Logic
 
-The current default behavior of the Multiplayer Component is a simple player state synchronization. This means that when a player joins a space, they will be able to see other players and their movements in the world in real-time.
+Use the `@ServerOnly()` decorator for code that should **only** run on the server.
 
-## Sending Multiplayer Messages
+```ts
+import { ScriptBehavior, Env, ServerOnly } from '@oo/scripting'
 
-Here's an example of broadcasting a message to all players:
-
-```ts copy {1, 4, 5, 8, 9, 13, 17-21, 24-27, 30} filename="main"
-import Multiplayer from "./Multiplayer";
-
-export default class Game {
-    private multiplayerManager: Multiplayer;
-    private offMessage = null;
-
-    onReady = async () => {
-        this.multiplayerManager = Multiplayer.getMain();
-        this.offMessage = this.multiplayerManager.room.onMessage(this.onMessage);
-    }
-
-    onStart = () => {
-        this.sendMessage();
-    }
-
-    sendMessage = () => {
-        multiplayerManager.room.send({
-            type: "broadcast", // required
-            hello: "world",
-            exclude: [], // optional: array of player sessionIds to exclude from the boardcast
-        })
-    }
-
-    onMessage = (message) => {
-        const type = message.type;
-        console.log("New message from the server!", type, message);
-    }
-
-    onDispose = () => {
-        this.offMessage();
-    }
+export default class MyLogic extends ScriptBehavior {
+  @ServerOnly()
+  onReady() {
+    console.log("Server-Only: won't run on client.")
+  }
 }
 ```
 
-Example of sending a message to a specific player:
+### Client & Server Messages
 
-```ts copy
-// we get the main multiplayer component
-const multiplayerManager = Multiplayer.getMain();
+- **Client-Side:**  
+  ```ts
+  GameClient.onMessage("my-message", (data) => {
+    console.log("Client received:", data)
+  })
 
-// we store the players list in a variable
-const players = Object.values(multiplayerManager.room.state.players.toJSON())
+  GameClient.send("my-message", { foo: "bar" })
+  ```
+- **Server-Side:**  
+  ```ts
+  GameServer.onMessage("my-message", (data, clientId) => {
+    console.log("Server received from client:", clientId, data)
+  })
 
-let playerSessionId = null
+  GameServer.send("my-message", { serverData: 123 }, clientId) 
+  // Or broadcast to all using '*' for clientId
+  ```
 
-// we loop through the players list to find a player that is not us
-players.forEach((_player: any) => {
-    if (_player.sessionId !== Multiplayer.me.sessionId) {
-        playerSessionId = _player.sessionId
-        return
-    }
-})
+---
 
-// if we found another player, we send him a message
-if (playerSessionId) {
-    Multiplayer.room.send({
-        type: "send", // required
-        playerId: playerSessionId, // required
-        payload: {
-            hello: "world from player",
-        },
-    })
+## 2. Remote Procedure Calls (RPC)
+
+RPCs let you call methods on the server or client directly.  
+
+- **`@Rpc.Server()`**: Client → Server  
+- **`@Rpc.Client()`**: Server → Client  
+
+```ts
+import { ScriptBehavior, Rpc } from '@oo/scripting'
+
+export default class MyRPCs extends ScriptBehavior {
+
+  // CLIENT calls this on SERVER
+  @Rpc.Server()
+  sendMessageToServer(text: string) {
+    console.log("Server got:", text)
+  }
+
+  // SERVER calls this on CLIENT
+  @Rpc.Client()
+  showMessageOnClient(msg: string) {
+    console.log("Client sees message:", msg)
+  }
 }
 ```
 
-> Note: Multiplayer.room is of the [GameRoom](./reference/gameroom.md) type.
+> **Options**:  
+> - `reply: true` waits for a return value.  
+> - `timeout` sets a max wait time.  
+> - `broadcast` can be used to send to all clients in one call (though `GameServer.send(...)` can do that too).
+
+---
+
+## 3. Network State (netState)
+
+A quick way to sync small bits of data (like positions, animations) between server and clients is to store them in a special object.  
+
+```ts
+import { ScriptBehavior, $Param as P, Env } from '@oo/scripting'
+
+export default class SimpleSync extends ScriptBehavior {
+  netState = P.Object({
+    pos: P.Vector3(),
+    rot: P.Number(),
+    anim: P.String(),
+  })
+
+  @ServerOnly()
+  onReady() {
+    // Server sets initial data
+    this.netState.pos.set(0, 1, 0)
+    this.netState.rot = 0
+    this.netState.anim = "idle"
+  }
+
+  onFrame(dt) {
+    // If it's a client, smoothly interpolate or animate
+    if (!Env.isServer) {
+      // e.g. this.host.position.lerp(this.netState.pos, 0.1)
+    }
+  }
+}
+```
+
+---
+
+## 4. Putting It All Together
+
+1. **Server-Only Methods:** Ensure secure logic with `@ServerOnly()` or by checking `Env.isServer`.  
+2. **Messaging:** Send/receive custom messages with `GameClient.onMessage()` / `GameClient.send()` and `GameServer.onMessage()` / `GameServer.send()`.  
+3. **RPCs:** Decorate methods with `@Rpc.Server()` or `@Rpc.Client()` for direct calls across the network.  
+4. **netState Sync:** Keep a small state object for positions, animations, or other immediate data.  
+
+All of this happens seamlessly because awe orchestrates server-side VMs for you. You can develop advanced multiplayer features without spinning up or configuring servers manually. Experiment, iterate, and deploy with ease!
