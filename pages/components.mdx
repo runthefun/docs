@@ -63,17 +63,18 @@ export default class MyCube extends ScriptComponent {
 Expose editable properties in the Studio UI:
 
 ```ts
-import { ScriptComponent, Param } from '@oo/scripting'
+import { ScriptComponent, $Param as P } from '@oo/scripting'
 
 export default class MyCube extends ScriptComponent {
-  @Param({ type: "color" })
-  color = "#ffffff"
+  color = P.Color("#ffffff");
   
   onRenderUpdate() {
     // e.g. update material color
   }
 }
 ```
+
+[See all available param types](https://docs.awe.box/reference/param#parameters)
 
 ### Custom Config & Methods
 
