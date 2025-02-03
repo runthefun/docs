@@ -5,6 +5,7 @@ import { LanguageModelV1, streamText } from "ai";
 import { LLMS } from "../../components/qabot/utils/pipelines/constants";
 import { groq } from "@ai-sdk/groq";
 import { openai } from "@ai-sdk/openai";
+import { anthropic } from "@ai-sdk/anthropic";
 
 export const config = {
   runtime: "edge",
@@ -26,11 +27,11 @@ export default async function handler(req: NextRequest) {
     let model: LanguageModelV1;
 
     if (modelName === "groq") {
-      model = getModel(LLMS.groq.groqDeepseekR170b);
+      model = groq("deepseek-r1-distill-llama-70b");
     } else if (modelName === "sonnet") {
-      model = getModel(LLMS.anthropic.sonnet);
+      model = anthropic("claude-3-5-sonnet-latest");
     } else if (modelName === "haiku") {
-      model = getModel(LLMS.anthropic.haiku);
+      model = anthropic("claude-3-5-haiku-latest");
     } else if (modelName === "o3-mini-low") {
       model = openai("o3-mini");
       openaiOpts = { reasoningEffort: "low" };
