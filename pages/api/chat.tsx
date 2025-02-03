@@ -1,49 +1,48 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
+import { codeai_prompt } from "../../components/qabot/utils/pipelines/scripting";
+import { getModel } from "../../components/qabot/utils/pipelines/utils";
+import { streamText } from "ai";
+import { openai } from "@ai-sdk/openai";
 
 export const config = {
-  runtime: 'edge',
+  runtime: "edge",
 };
 
 export default async function handler(req: NextRequest) {
+  //
   try {
-    const { prompt, stream = false } = await req.json();
+    const { messages, model: modelName } = await req.json();
 
-    const response = await fetch('https://oo-git-ai-oncyber.vercel.app/api/qabot', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "prompt": prompt,
-        "stream": stream
-      }),
-    });
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
-    const encoder = new TextEncoder();
-    const transformStream = new TransformStream({
-      async transform(chunk, controller) {
-        const text = new TextDecoder().decode(chunk);
-        const lines = text.split('\n').filter(line => line.trim() !== '');
-        for (const line of lines) {
-          const colonIndex = line.indexOf(':');
-          if (colonIndex !== -1) {
-            const value = line.slice(colonIndex + 1).trim().replace(/^"|"$/g, '');
-            controller.enqueue(encoder.encode(value));
-          }
-        }
-      },
+    const system = await codeai_prompt({
+      messages,
     });
 
-    return new NextResponse(response.body?.pipeThrough(transformStream), {
-      headers: {
-        'Content-Type': 'text/plain',
-        'Transfer-Encoding': 'chunked',
+    const model = getModel(modelName);
+
+    const result = streamText({
+      model: openai("o3-mini"),
+      providerOptions: {
+        openai: { reasoningEffort: "medium" },
       },
+      system,
+      messages,
     });
-  } catch (error) {
-    console.error('Error:', error);
-    return NextResponse.json({ error: 'An error occurred' }, { status: 500 });
+
+    const response = result.toDataStreamResponse();
+
+    return response;
+    //
+  } catch (e) {
+    //
+
+    return NextResponse.json(
+      {
+        type: "error",
+        error: e.message,
+      },
+      {
+        status: 500,
+      }
+    );
   }
 }
