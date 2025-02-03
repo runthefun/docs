@@ -9,13 +9,20 @@ import { useFeedbackStore } from "./feedbackStore";
 
 let endpoint = "/api/chat";
 
+let search =
+  typeof window !== "undefined"
+    ? new URLSearchParams(window.location.search)
+    : null;
+
+let model = search?.get("model");
+
 // if (process.env.NODE_ENV === "development") {
 //     //
 //     endpoint = "http://localhost:3000/api/qabot";
 // }
 
 export default function RagQa() {
-  const { model, ragOptions, showThinking } = useAdminState();
+  const { ragOptions, showThinking } = useAdminState();
 
   const threadIdRef = useRef<string>(null);
 
@@ -139,7 +146,7 @@ export function AIMessage({
   isLoading: boolean;
 }) {
   //
-  const showThinking = false;
+  const showThinking = true;
 
   const completion = msg.content;
 
@@ -235,14 +242,14 @@ function parseAIMessage(msg: string) {
     msg = msg.slice(runIdEndIndex + "</run>".length);
   }
 
-  let thinkingIndex = msg.indexOf("<thinking>");
-  let thinkingEndIndex = msg.indexOf("</thinking>");
+  let thinkingIndex = msg.indexOf("<think>");
+  let thinkingEndIndex = msg.indexOf("</think>");
 
   if (thinkingIndex !== -1 && thinkingEndIndex !== -1) {
     //
-    thinking = msg.slice(thinkingIndex + "<thinking>".length, thinkingEndIndex);
+    thinking = msg.slice(thinkingIndex + "<think>".length, thinkingEndIndex);
 
-    msg = msg.slice(thinkingEndIndex + "</thinking>".length);
+    msg = msg.slice(thinkingEndIndex + "</think>".length);
   }
 
   let answerIndex = msg.indexOf("<answer>");

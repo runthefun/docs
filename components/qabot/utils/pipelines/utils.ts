@@ -29,7 +29,6 @@ export async function fetchRagEntry(enrty: string, defaultVal?: string) {
 
     return result;
 }
-    */
 
 export async function saveRagEntry(enrty: string, value: string) {
     //
@@ -47,43 +46,44 @@ export async function saveRagEntry(enrty: string, value: string) {
 
     return value;
 }
+*/
 
 const providers = {
-    openai: createOpenAI({
-        compatibility: "strict",
-    }),
+  openai: createOpenAI({
+    compatibility: "strict",
+  }),
 
-    anthropic: createAnthropic({}),
-    google: createGoogleGenerativeAI({}),
-    groq: createGroq({}),
+  anthropic: createAnthropic({}),
+  google: createGoogleGenerativeAI({}),
+  groq: createGroq({}),
 };
 
 export function setTemplateValues(
-    template: string,
-    values: Record<string, string>
+  template: string,
+  values: Record<string, string>
 ) {
+  //
+  return template.replace(/{{(.*?)}}/g, (match, key) => {
     //
-    return template.replace(/{{(.*?)}}/g, (match, key) => {
-        //
-        return values[key] || match;
-    });
+    return values[key] || match;
+  });
 }
 
 const defaultModel = LLMS.openai.gpt4oMini;
 
 export function getModel(model: string) {
-    //
-    if (model) {
-        if (model in LLMS.openai) {
-            return providers.openai(LLMS.openai[model]);
-        } else if (model in LLMS.anthropic) {
-            return providers.anthropic(LLMS.anthropic[model]);
-        } else if (model in LLMS.groq) {
-            return providers.groq(LLMS.groq[model]);
-        } else if (model in LLMS.google) {
-            return providers.google(LLMS.google[model]);
-        }
+  //
+  if (model) {
+    if (model in LLMS.openai) {
+      return providers.openai(LLMS.openai[model]);
+    } else if (model in LLMS.anthropic) {
+      return providers.anthropic(LLMS.anthropic[model]);
+    } else if (model in LLMS.groq) {
+      return providers.groq(LLMS.groq[model]);
+    } else if (model in LLMS.google) {
+      return providers.google(LLMS.google[model]);
     }
+  }
 
-    return providers.openai(defaultModel);
+  return providers.openai(defaultModel);
 }

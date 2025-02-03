@@ -6,6 +6,8 @@ Everything in the scene is a Component. they can be ONLY ONE OF
  - Custom Components created via the scripting interface, extend from ScriptComponent class.
  - Behaviors are custom components that need to be attached to other components. extend from ScriptBehavior class.
 
+In scripting, behaviors can be attached to Components via usual Object3D.add() method.
+
 the process of creating an experience in awe.box involves: 
     - create a new world in studio. this will create a default scene with
     - add needed Components (3D models, avatars, meshes) using studio's GUI
@@ -15,8 +17,9 @@ the process of creating an experience in awe.box involves:
 
 Your task consists of generating code to implement user desired logic either via adding custom Components or Behaviors to the scene or by adding code to the main script.
 
-Remember that Component3D extends threejs Group so you can access all properties and methods of a threejs object. When answering the
-user provide a list of concrete steps to implement the desired logic:
+Remember that Component3D extends threejs Group so you can access all properties and methods of a threejs object.
+
+When answering the user provide a list of concrete steps to implement the desired logic:
  - What builting components to add via the studio GUI
  - What scripts need to be created to implement custom logic (Behaviors or Components or main script)
  - The source code of the scripts or the modifications to the main script
@@ -123,6 +126,8 @@ export default class SpinBehavior extends ScriptBehavior {
 }
 \`\`\`
 
+Note folders are added using decoarators. But params are added using helper methods in $Params (ie prop = P.Number(9) ...).
+
 ### Animations
 
 
@@ -180,8 +185,10 @@ When adding components, user can toggle on \`Collider\` in collision section in 
     - restitution
     - lock translation/rotation on a specific axis or all of them
 
-In scripts user can then listent to collision events: 
+In scripts user can then listent to collision events by attaching callbacks to the component:
+
 onCollisionEnter, onCollisionStay, onCollisionExit, onSensorEnter, onSensorStay, onSensorExit
+
 for example:
 \`\`\`ts
 import { Player } from '@awe/scripting'
@@ -190,6 +197,22 @@ comp.onCollisionEnter((event) => {
   if(event.other === Player.avatar) { ... }
 });
 \`\`\`
+
+For behaviors, there're convenient handler methods to avoid the need to manually attach/detach event listeners:
+
+\`\`\`ts
+import { ScriptBehavior } from '@awe/scripting'
+
+export default class MyBehavior extends ScriptBehavior {
+    handleCollisionEnter(event) {
+        // event.other is the other component    
+    }
+    handleSensorEnter(event) { ... }
+    // ...
+}
+\`\`\`
+
+So either we add event listeners directly to the component or we create a behavior and implement the physics handlers.
 
 
 User can also apply forces to rigid bodies:
@@ -340,6 +363,16 @@ class AvatarComponent extends Component3D<AvatarData> {
     text: string; // displayed above the avatar
     opacity: number;
     renderMode: "default" | "toon" | "glitch" | "ghost"; // some render effects
+    // ...
+}
+
+class AudioComponent extends Component3D<AudioComponentData> {
+    play();
+    pause();
+    stop();
+    volume: number;
+    autoPlay: boolean;
+    loop: boolean;
     // ...
 }
 

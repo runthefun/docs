@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { codeai_prompt } from "../../components/qabot/utils/pipelines/scripting";
 import { getModel } from "../../components/qabot/utils/pipelines/utils";
-import { streamText } from "ai";
+import { LanguageModelV1, streamText } from "ai";
+import { LLMS } from "../../components/qabot/utils/pipelines/constants";
+import { groq } from "@ai-sdk/groq";
 import { openai } from "@ai-sdk/openai";
 
 export const config = {
@@ -17,10 +19,36 @@ export default async function handler(req: NextRequest) {
       messages,
     });
 
-    const model = getModel(modelName);
+    // const model = getModel(LLMS.groq.groqDeepseekR170b);
+
+    let openaiOpts = { reasoningEffort: "medium" };
+
+    let model: LanguageModelV1;
+
+    if (modelName === "groq") {
+      model = getModel(LLMS.groq.groqDeepseekR170b);
+    } else if (modelName === "sonnet") {
+      model = getModel(LLMS.anthropic.sonnet);
+    } else if (modelName === "haiku") {
+      model = getModel(LLMS.anthropic.haiku);
+    } else if (modelName === "o3-mini-low") {
+      model = openai("o3-mini");
+      openaiOpts = { reasoningEffort: "low" };
+    } else if (modelName === "o3-mini-high") {
+      model = openai("o3-mini");
+      openaiOpts = { reasoningEffort: "high" };
+    } else {
+      model = openai("o3-mini");
+    }
+
+    console.log("model", model.modelId, model.provider);
+
+    if (model.provider.startsWith("openai")) {
+      console.log("openaiOpts", openaiOpts);
+    }
 
     const result = streamText({
-      model: openai("o3-mini"),
+      model,
       providerOptions: {
         openai: { reasoningEffort: "medium" },
       },
