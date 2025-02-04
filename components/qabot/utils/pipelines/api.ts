@@ -565,6 +565,7 @@ class PlayerWrapper {
 
 /**
  * Repersents the container for all objects in the scene for the current game.
+ * this is World singleton object.
  */
 class Space extends Object3D {
   //
