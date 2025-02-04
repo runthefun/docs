@@ -4,6 +4,7 @@ import { LanguageModelV1, streamText } from "ai";
 import { groq } from "@ai-sdk/groq";
 import { openai } from "@ai-sdk/openai";
 import { anthropic } from "@ai-sdk/anthropic";
+import { google, createGoogleGenerativeAI } from "@ai-sdk/google";
 
 export const config = {
   runtime: "edge",
@@ -36,6 +37,10 @@ export default async function handler(req: NextRequest) {
     } else if (modelName === "o3-mini-high") {
       model = openai("o3-mini");
       openaiOpts = { reasoningEffort: "high" };
+    } else if (modelName === "gemini") {
+      model = createGoogleGenerativeAI({
+        apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+      })("gemini-2.0-flash-thinking-exp");
     } else {
       model = openai("o3-mini");
     }

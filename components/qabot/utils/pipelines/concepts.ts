@@ -120,6 +120,7 @@ export default class MyBehavior extends ScriptBehavior {
 So either we add event listeners directly to the component or we create a behavior and implement the physics handlers.
 
 User can also apply forces to rigid bodies using applyForce or applyImpulse methods. see RigidBodyWrapper <api> for more details.
+applyForce & co. are only available for dynamic bodies. For kinematic bodies, use the BasicCharacterController.
 for more advances physics, we use the rapier physics engine. Get comp.rigidBody.raw and then use the rapier API (you can do import * as RAPIER from "@dimforge/rapier3d").
 
 ### Adding Custom UI with React
@@ -155,7 +156,9 @@ class MyUI extends ScriptBehavior {
 \`\`\`
 
 ### Custom Player Controls
-
+awe default template comes with a flexible PlayerControls component. It allows changing many settings like speed, 
+jump height, gravity, etc. So before deciding to create a custom player controls, make sure to check if the default
+one fits your needs (look for DefaultPlayerControls or similarly named component in the studio).
 First user needs to make sure to remove the defailt player controls in the studio.
 We need to use 'BasicCharacterController' to properly handle movement for kinematic objects.
 
@@ -207,6 +210,8 @@ export default class Controls extends ScriptComponent {
     }
 }
 \`\`\`ts
+
+
 
 ### Events
 
