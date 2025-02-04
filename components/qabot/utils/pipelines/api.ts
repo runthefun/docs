@@ -320,7 +320,57 @@ class TextComponent extends Component3D<TextComponentData> {
     opacity: number;
 }
 
+// used for pathfinding. 
+// This has to be created in studio and use Components.byType("navmesh") to get it in the script
+class NavmeshComponent extends Component3D {
+    crowd: NavmeshCrowd;
+}
 
+interface AgentParams {
+  radius: number;
+  height: number;
+  maxAcceleration: number;
+  maxSpeed: number;
+}
+
+
+class NavmeshCrowd  {
+    component: NavmeshComponent;
+    params: CrowdParams;
+    agents: NavmeshAgent[];
+
+    addAgent(target: Vector3 | Object3D, params?: Partial<AgentParams>): NavmeshAgent;
+    removeAgent(agent: NavmeshAgent): boolean;
+
+    findClosestPoint(position: Vector3, target?: Vector3): Vector3;
+    findRandomPoint(target?: Vector3): Vector3;
+    findRandomPoint(position: Vector3, radius: number, target?: Vector3): Vector3;
+  
+}
+
+class NavmeshAgent extends Augmented {
+
+    get velocity(): Vector3;
+    
+    findClosestPoint(position: Vector3): Vector3;
+    findRandomPoint(radius: number, target?: Vector3): Vector3;
+    get parameters(): Partial<AgentParams>;
+    set parameters(params: Partial<AgentParams>);
+    updateParameters(params: Partial<AgentParams>): void;
+    
+    teleport(position: Vector3): void;
+    
+    moveTo(position: Vector3, opts?: {
+        callback?: (reached: boolean) => void;
+    }): boolean;
+    
+    moveToTarget(target: Component3D, opts?: {
+        offset?: number;
+        callback?: () => void;
+    }): void;
+    
+    reset(): void;
+}
 
 
 class MainCamera extends PerspectiveCamera {

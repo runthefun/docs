@@ -211,7 +211,44 @@ export default class Controls extends ScriptComponent {
 }
 \`\`\`ts
 
+### Pathfinding
 
+If the user added navmesh to the scene, they can use the built-in pathfinding api to create nav agents and find paths.
+
+Example:
+\`\`\`ts
+export default class MyComponent extends ScriptComponent {
+
+    onReady = () => {
+        // get the navmesh component
+        const navmesh = Components.byTag("navmesh")[0];
+        // create a nav agent
+        let navAgent = navMesh.crowd.createAgent(this.host, {...});
+
+        // sync the agent animation; position is updated automatically by the agent
+        navAgent.onUpdate(() => {
+            this.host["animation"] = this.navAgent.isMoving ? "walk" : "idle";
+        })
+
+
+        // later on some event
+        // move to a position
+        this.navAgent.moveTo(somePosition, {
+            // optional callback
+            callback: (reached) => {}
+        });
+
+        // or move near a target component
+        this.navAgent.moveToTarget(target, {
+            // optional callback
+            callback: (reached) => {}
+        });
+    }
+}
+//
+
+
+\`\`\`
 
 ### Events
 
