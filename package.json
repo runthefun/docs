@@ -15,6 +15,7 @@
     "@ai-sdk/groq": "^1.0.5",
     "@ai-sdk/openai": "^1.0.5",
     "@nanostores/react": "github:ai/react",
+    "@openrouter/ai-sdk-provider": "^0.2.0",
     "ai": "^4.1.17",
     "dompurify": "^3.1.6",
     "highlight.js": "^11.10.0",

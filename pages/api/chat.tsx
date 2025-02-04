@@ -5,6 +5,11 @@ import { groq } from "@ai-sdk/groq";
 import { openai } from "@ai-sdk/openai";
 import { anthropic } from "@ai-sdk/anthropic";
 import { google, createGoogleGenerativeAI } from "@ai-sdk/google";
+import { createOpenRouter } from "@openrouter/ai-sdk-provider";
+
+const openrouter = createOpenRouter({
+  apiKey: process.env.OPEN_ROUTER_API_KEY,
+});
 
 export const config = {
   runtime: "edge",
@@ -25,7 +30,9 @@ export default async function handler(req: NextRequest) {
 
     let model: LanguageModelV1;
 
-    if (modelName === "groq") {
+    if (modelName === "deepseek") {
+      model = openrouter.chat("deepseek/deepseek-r1");
+    } else if (modelName === "groq") {
       model = groq("deepseek-r1-distill-llama-70b");
     } else if (modelName === "sonnet") {
       model = anthropic("claude-3-5-sonnet-latest");

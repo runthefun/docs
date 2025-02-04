@@ -140,7 +140,7 @@ function MyReactComp() {
 
 class MyUI extends ScriptBehavior {
 
-    renderer = UI.createRenderer(MyReactComp);
+    renderer = UI.createRenderer();
 
     // render the component, initially or when needed
     // for example in onReady
