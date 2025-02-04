@@ -16,7 +16,7 @@ Use the following pieces of retrieved context to answer the user question.
 {{concepts}}
 </concepts>
 
-<types>
-{{basicTypes}}
-</types>
+<api>
+{{api}}
+</api>
 `;

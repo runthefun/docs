@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { codeai_prompt } from "../../components/qabot/utils/pipelines/scripting";
-import { getModel } from "../../components/qabot/utils/pipelines/utils";
 import { LanguageModelV1, streamText } from "ai";
-import { LLMS } from "../../components/qabot/utils/pipelines/constants";
 import { groq } from "@ai-sdk/groq";
 import { openai } from "@ai-sdk/openai";
 import { anthropic } from "@ai-sdk/anthropic";
@@ -42,11 +40,11 @@ export default async function handler(req: NextRequest) {
       model = openai("o3-mini");
     }
 
-    console.log("model", model.modelId, model.provider);
-
-    if (model.provider.startsWith("openai")) {
-      console.log("openaiOpts", openaiOpts);
-    }
+    console.log("chat", {
+      model: model.modelId,
+      ...(model.provider.startsWith("openai") ? openaiOpts : {}),
+      system: system.length + " chars",
+    });
 
     const result = streamText({
       model,
@@ -63,6 +61,7 @@ export default async function handler(req: NextRequest) {
     //
   } catch (e) {
     //
+    console.error("error", e);
 
     return NextResponse.json(
       {

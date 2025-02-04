@@ -48,8 +48,10 @@ export default function RagQa() {
     onError: (error) => {
       //
       console.error("errrrrrrrr", error);
-
-      alert(error.message);
+      alert("Error: " + error.message);
+    },
+    onFinish: (_, opts) => {
+      console.log("onFinish", opts.usage);
     },
   });
 
