@@ -286,6 +286,43 @@ class ModelComponent extends Component3D<ModelComponentData> {
   opacity: number;
 }
 
+type TextAlignment = "left" | "center" | "right";
+type FontFamily = "aeonik-bold" | "aeonik-medium" | "playfair-regular" | "playfair-italic";
+type TextTransform = "none" | "uppercase" | "lowercase" | "capitalize" | "togglecase";
+
+interface TextComponentData extends Component3DData {
+
+    type: "text";
+    text: string;
+    font?: FontFamily;
+    // Width of the text box. Defaults to 500. Use this to avoid breaking a long into multiple lines
+    width?: number;
+    // Defaults to 60
+    lineHeight?: number;
+    // Defaults to "#ffffff"
+    textColor?: string;
+    // Defaults to "left"
+    align?: TextAlignment;
+    textTransform?: TextTransform;
+    // defaults to 1
+    opacity?: number;
+}
+
+// Uses to show text in 3D scene (not an UI overly but webgl).
+class TextComponent extends Component3D<TextComponentData> {
+    text: string;
+    font: FontFamily;
+    width: number;
+    lineHeight: number;
+    textColor: string;
+    align: TextAlignment;
+    textTransform: string;
+    opacity: number;
+}
+
+
+
+
 class MainCamera extends PerspectiveCamera {
   useControls(controls: "thirdperson" | "firstperson" | any);
 

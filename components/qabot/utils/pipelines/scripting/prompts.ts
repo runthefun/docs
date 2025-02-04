@@ -10,6 +10,8 @@ export const prompts = [
   //
   `create a component to handle player movement using wasd keyboard for movement, and space for jump`,
   //
+  `I want my npc avatar to show a welcome message over its head when the player is near it`,
+  //
   `I want to create a simple collector game. I've already added a coin 3D model to the scene. 
 the rule is before the game to create a dozen of clones for the coin spread over the scene. 
 the user collects a coin when it collides with it; and need to collect all the 
