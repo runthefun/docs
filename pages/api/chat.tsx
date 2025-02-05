@@ -15,8 +15,39 @@ export const config = {
   runtime: "edge",
 };
 
+function addCorsHeaders(headers: Headers): Headers {
+  headers.set("Access-Control-Allow-Origin", "*");
+  headers.set(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+  headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  return headers;
+}
+
+export async function OPTIONS(req: Request) {
+  const headers = addCorsHeaders(new Headers());
+  return new NextResponse(null, { headers, status: 204 });
+}
+
 export default async function handler(req: NextRequest) {
   //
+  if (req.method === "OPTIONS") {
+    return OPTIONS(req);
+  }
+
+  if (req.method !== "POST") {
+    return NextResponse.json(
+      {
+        type: "error",
+        error: "Invalid method",
+      },
+      {
+        status: 405,
+      }
+    );
+  }
+
   try {
     const { messages, model: modelName, noStream } = await req.json();
 
@@ -96,6 +127,8 @@ export default async function handler(req: NextRequest) {
     const result = streamText(genOptions);
 
     const response = result.toDataStreamResponse();
+
+    addCorsHeaders(response.headers);
 
     return response;
     //
