@@ -26,9 +26,10 @@ export default async function handler(req: NextRequest) {
 
     // const model = getModel(LLMS.groq.groqDeepseekR170b);
 
-    let openaiOpts = { reasoningEffort: "medium" };
+    let settings = null;
+    let openaiOpts = null;
 
-    let model: LanguageModelV1;
+    let model = anthropic("claude-3-5-sonnet-latest");
 
     if (modelName === "deepseek") {
       model = openrouter.chat("deepseek/deepseek-r1");
@@ -41,6 +42,9 @@ export default async function handler(req: NextRequest) {
     } else if (modelName === "o3-mini-low") {
       model = openai("o3-mini");
       openaiOpts = { reasoningEffort: "low" };
+    } else if (modelName === "o3-mini-medium") {
+      model = openai("o3-mini");
+      openaiOpts = { reasoningEffort: "medium" };
     } else if (modelName === "o3-mini-high") {
       model = openai("o3-mini");
       openaiOpts = { reasoningEffort: "high" };
@@ -48,21 +52,25 @@ export default async function handler(req: NextRequest) {
       model = createGoogleGenerativeAI({
         apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
       })("gemini-2.0-flash-thinking-exp");
-    } else {
-      model = openai("o3-mini");
+    }
+
+    if (openaiOpts) {
+      settings = {
+        providerOptions: {
+          openai: { reasoningEffort: "medium" },
+        },
+      };
     }
 
     console.log("chat", {
       model: model.modelId,
-      ...(model.provider.startsWith("openai") ? openaiOpts : {}),
       system: system.length + " chars",
+      settings,
     });
 
     const result = streamText({
       model,
-      providerOptions: {
-        openai: { reasoningEffort: "medium" },
-      },
+      ...settings,
       system,
       messages,
     });
