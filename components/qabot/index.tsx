@@ -51,7 +51,7 @@ export default function RagQa() {
       alert("Error: " + error.message);
     },
     onFinish: (_, opts) => {
-      console.log("onFinish", opts.finishReason);
+      console.log("onFinish", opts);
     },
   });
 
