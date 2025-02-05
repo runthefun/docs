@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { codeai_prompt } from "../../components/qabot/utils/pipelines/scripting";
-import { LanguageModelV1, streamText } from "ai";
+import { CoreMessage, generateText, LanguageModelV1, streamText } from "ai";
 import { groq } from "@ai-sdk/groq";
 import { openai } from "@ai-sdk/openai";
 import { anthropic } from "@ai-sdk/anthropic";
@@ -18,7 +18,7 @@ export const config = {
 export default async function handler(req: NextRequest) {
   //
   try {
-    const { messages, model: modelName } = await req.json();
+    const { messages, model: modelName, noStream } = await req.json();
 
     const system = await codeai_prompt({
       messages,
@@ -63,17 +63,37 @@ export default async function handler(req: NextRequest) {
     }
 
     console.log("chat", {
+      provider: model.provider,
       model: model.modelId,
       system: system.length + " chars",
       settings,
     });
 
-    const result = streamText({
+    let systemMsg: CoreMessage = {
+      role: "system",
+      content: system,
+    };
+
+    if (model.provider.startsWith("anthropic")) {
+      systemMsg.providerOptions = {
+        anthropic: { cacheControl: { type: "ephemeral" } },
+      };
+    }
+
+    const genOptions = {
       model,
       ...settings,
-      system,
-      messages,
-    });
+      messages: [systemMsg].concat(messages),
+    };
+
+    if (noStream) {
+      //
+      const result = await generateText(genOptions);
+
+      return NextResponse.json(result);
+    }
+
+    const result = streamText(genOptions);
 
     const response = result.toDataStreamResponse();
 

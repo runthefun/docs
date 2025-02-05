@@ -51,7 +51,7 @@ export default function RagQa() {
       alert("Error: " + error.message);
     },
     onFinish: (_, opts) => {
-      console.log("onFinish", opts.usage);
+      console.log("onFinish", opts.finishReason);
     },
   });
 
@@ -148,7 +148,7 @@ export function AIMessage({
   isLoading: boolean;
 }) {
   //
-  const showThinking = true;
+  const showThinking = process.env.NODE_ENV === "development";
 
   const completion = msg.content;
 
