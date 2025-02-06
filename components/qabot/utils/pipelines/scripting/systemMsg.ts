@@ -12,6 +12,7 @@ use markdown for formatting. Put code snippets in a code block.
 
 <scripting_instructions>
 - Make sure to include the necessary imports
+- Output correct typescript code that typechecks
 - DO NOT USE ANY API that is not available in the browser or via awe scripting interface.
 - Always ends the class name with Behavior or Component if relevant.
 - When creating a custom component or behavior, instruct the user to add or attach via studio. DO NOT instruct to add them via code.
