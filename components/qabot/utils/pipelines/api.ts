@@ -10,6 +10,7 @@ interface Param<T = any> {
   info?: string;
   visible?: (self: Component3D) => boolean;
   format?: Format;
+  defaultValue?: T;
 }
 
 interface NumberParam extends Param<number> {
