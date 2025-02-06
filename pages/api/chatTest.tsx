@@ -54,8 +54,21 @@ export default async function handler(req: NextRequest) {
     );
   }
 
+  const uid = Math.random().toString(36).substring(7);
+
   const stream = simulateReadableStream({
-    chunks: ["Here's the code", code, "Create a new file with this code"],
+    chunks: [
+      "Here's the code",
+      ...Array(10)
+        .fill(0)
+        .map((_, i) => {
+          return "Dummy line " + i + "\n";
+        }),
+      code(uid),
+      "Create a new file with this code",
+    ],
+    initialDelayInMs: 1000,
+    chunkDelayInMs: 1000,
   });
 
   // send response with stream
@@ -67,20 +80,25 @@ export default async function handler(req: NextRequest) {
   //
 }
 
-const code = `
+const code = (t: string) => `
 \`\`\`ts
 import { ScriptBehavior, $Param as P } from "@awe/scripting";
 
-export default class MyBehavior extends ScriptBehavior {
+export default class MySpinBehavior extends ScriptBehavior {
 
     static config = {
         title: "My Behavior",
     }
 
-    prop = P.String("Hello");
+    speed = P.Number(1, { min: 0, max: 10 });
 
     onReady() {
-        // Called when the behavior is ready
+        const avatar = Player.avatar;
+    }
+
+    onFrame() {
+        
+        this.host.rotation.y += this.speed * Math.PI / 180;
     }
 }
 \`\`\`

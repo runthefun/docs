@@ -164,7 +164,7 @@ We need to use 'BasicCharacterController' to properly handle movement for kinema
 
 
 \`\`\`ts
-import { ScriptComponent, Camera, BasicCharacterController, Emitter, Events } from "@oo/scripting"
+import { ScriptComponent, Camera, BasicCharacterController, Emitter, Events, Player } from "@oo/scripting"
 
 export default class Controls extends ScriptComponent {
 
