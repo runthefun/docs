@@ -14,7 +14,7 @@ In scripting, behaviors can be attached to Components via usual Object3D.add() m
 the process of creating an experience in awe.box involves: 
     - create a new world in studio. this will create a default scene with
     - add needed Components (3D models, avatars, meshes) using studio's GUI
-    - attach behaviors to Components to add custom logic
+    - attach behaviors to Components in studio to add custom logic
     - additionally create custom Components or Behvaiors (via script) to add more complex logic
 
 
@@ -36,7 +36,7 @@ export default class MyComponent extends ScriptComponent {
 \`\`\`ts
 import { ScriptBehavior } from "@awe/scripting"
 
-export default class MyBehavior extends ScriptComponent {
+export default class MyBehavior extends ScriptBehavior {
     // implement relevent lifecycle methods, see <api> for more details
     onReady() { // can access this.host to get the host component }
 }
@@ -48,6 +48,7 @@ export default class MyBehavior extends ScriptComponent {
 The Components manager manages components in the scene (add, clone, find...). 
 Typically the user assigns a 'scripting id' or 'scripting tag' to an added instance 
 in the studio to mark the component instance. Then use the manager to find it in the script.
+Alternatively, you can use $Param.Component in script params to reference another component.
 we can also create components dynamically using Components.create
 see <api> for more details.
 
