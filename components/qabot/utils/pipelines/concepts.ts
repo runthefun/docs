@@ -4,7 +4,10 @@ awe.box is a platform for creating 3D browser experiences (games, interactive ga
 Everything in the scene is a Component. they can be ONLY ONE OF 
  - builtin Components (model, mesh, avatar ...) extend from Component3D class.
  - Custom Components created via the scripting interface, extend from ScriptComponent class.
- - Behaviors are custom components that need to be attached to other components. extend from ScriptBehavior class.
+ 
+There're 2 types of custom Components:
+- ScriptBehavior: are used to augment the logic of an existing Component. They need to be attached to a Component.
+- ScriptComponent: are standalone Components that can be added to the scene. They can have their own logic and properties.
 
 In scripting, behaviors can be attached to Components via usual Object3D.add() method.
 
@@ -23,10 +26,19 @@ DO NOT USE ANY API that is not available in the browser or via awe scripting int
 ### Custom Component/Behaviors
 
 \`\`\`ts
-import { ScriptComponent, ScriptBehavior } from "@awe/scripting"
+import { ScriptComponent } from "@awe/scripting"
 
-class MyComponent extends ScriptComponent {
+export default class MyComponent extends ScriptComponent {
     // implement relevent lifecycle methods, see <api> for more details
+}
+\`\`\`
+
+\`\`\`ts
+import { ScriptBehavior } from "@awe/scripting"
+
+export default class MyBehavior extends ScriptComponent {
+    // implement relevent lifecycle methods, see <api> for more details
+    onReady() { // can access this.host to get the host component }
 }
 \`\`\`
 
@@ -68,6 +80,7 @@ We utilize FBX format for avatar anims.
 - In studio, user selects Avatar Animations component in the studio.
 - User Upload your animation and assign name to it for easy access later (in avatar.animation or $Param.Animation props).
 
+Default template includes  following animations: idle, walk, run, jump, fly.
 
 ### Animating Objects using animejs
 
@@ -144,9 +157,11 @@ class MyUI extends ScriptBehavior {
 
     // render the component, initially or when needed
     // for example in onReady
-    // or update the store and the component will re-render
     onReady() {
         this.renderer.render(<MyReactComp />);
+
+        // later update the store and the component will re-render
+        store.update({ count: 1 });
     }
     
     onDispose() {
@@ -157,7 +172,7 @@ class MyUI extends ScriptBehavior {
 
 ### Custom Player Controls
 awe default template comes with a flexible PlayerControls component. It allows changing many settings like speed, 
-jump height, gravity, etc. So before deciding to create a custom player controls, make sure to check if the default
+jump height, gravity, etc. So before deciding to create a custom player controls, MAKE SURE to check if the default
 one fits your needs (look for DefaultPlayerControls or similarly named component in the studio).
 First user needs to make sure to remove the defailt player controls in the studio.
 We need to use 'BasicCharacterController' to properly handle movement for kinematic objects.

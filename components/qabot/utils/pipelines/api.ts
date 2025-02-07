@@ -157,6 +157,7 @@ class Component3D<Data> extends Object3D {
   get behaviors(): ScriptBehavior[];
   get parentComponent();
   getBBox(target?: Box3): Box3;
+  // this clones the whole component with all its children/behaviors
   duplicate(): Promise<this>;
 
   // add, remove works for both behaviors and components as well as threejs objects
@@ -321,6 +322,39 @@ class TextComponent extends Component3D<TextComponentData> {
     opacity: number;
 }
 
+ interface ImageComponentData extends Component3DData {
+    type: "image";
+    opacity?: number;
+}
+
+class ImageComponent extends Component3D<ImageComponentData> {
+    opacity: number;
+}
+
+
+interface VideoComponentData extends Component3DData {
+    type: "video";
+    url: string;
+    volume?: number;
+    autoPlay: false;
+    opacity: number;
+    displayMode: "flat" | "curved";
+    // The angle of the curved video. Defaults to 180
+    curvedAngle: number;
+}
+
+class VideoComponent extends Component3D<VideoComponentData> {
+    // from  0 to 1
+    volume: number;
+    autoPlay: boolean;
+    opacity: number;
+    curvedAngle: number;
+    muted: boolean;
+    play(): void;
+    pause(): void;
+    get isPlaying(): boolean;
+}
+
 // used for pathfinding. 
 // This has to be created in studio and use Components.byType("navmesh") to get it in the script
 class NavmeshComponent extends Component3D {
@@ -407,6 +441,7 @@ class ComponentManager extends Object3D {
   // dynamically create a component
   create(data: Component3DData): Promise<Component3D>;
   destroy(comp): boolean;
+  // this clones the whole component with all its children/behaviors
   duplicate(comp): Promise;
 }
 
@@ -590,6 +625,15 @@ const UI: {
     renderSync: (node: ReactNode) => boolean;
   };
 };
+
+// to use with useStore hook
+class Store<State> extends Augmented {
+    constructor(state: State);
+    get state(): State;
+    update: (newState: Partial<State>) => void;
+}
+// react hook
+function useStore<T>(store: Store<T>): T;
 
 // singletons exposed from the package
 let World: Space;
