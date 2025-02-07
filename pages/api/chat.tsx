@@ -4,11 +4,15 @@ import { CoreMessage, generateText, LanguageModelV1, streamText } from "ai";
 import { groq } from "@ai-sdk/groq";
 import { openai } from "@ai-sdk/openai";
 import { anthropic } from "@ai-sdk/anthropic";
-import { google, createGoogleGenerativeAI } from "@ai-sdk/google";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { createOpenRouter } from "@openrouter/ai-sdk-provider";
 
 const openrouter = createOpenRouter({
   apiKey: process.env.OPEN_ROUTER_API_KEY,
+});
+
+const google = createGoogleGenerativeAI({
+  apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
 });
 
 export const config = {
@@ -62,15 +66,20 @@ export default async function handler(req: NextRequest) {
 
     let model = anthropic("claude-3-5-sonnet-latest");
 
+    // Those 2 seem broken atm
     if (modelName === "deepseek") {
       model = openrouter.chat("deepseek/deepseek-r1");
     } else if (modelName === "groq") {
       model = groq("deepseek-r1-distill-llama-70b");
-    } else if (modelName === "sonnet") {
+    }
+    // Claude
+    else if (modelName === "sonnet") {
       model = anthropic("claude-3-5-sonnet-latest");
     } else if (modelName === "haiku") {
       model = anthropic("claude-3-5-haiku-latest");
-    } else if (modelName === "o3-mini-low") {
+    }
+    // o3
+    else if (modelName === "o3-mini-low") {
       model = openai("o3-mini");
       openaiOpts = { reasoningEffort: "low" };
     } else if (modelName === "o3-mini-medium") {
@@ -79,16 +88,22 @@ export default async function handler(req: NextRequest) {
     } else if (modelName === "o3-mini-high") {
       model = openai("o3-mini");
       openaiOpts = { reasoningEffort: "high" };
-    } else if (modelName === "gemini") {
-      model = createGoogleGenerativeAI({
-        apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
-      })("gemini-2.0-flash-thinking-exp");
+    }
+    // gemini
+    else if (modelName === "gemini") {
+      model = google("gemini-2.0-flash-001");
+    } else if (modelName === "gemini-think") {
+      model = google("gemini-2.0-flash-thinking-exp-01-21");
+    } else if (modelName === "gemini-flash-lite") {
+      model = google("gemini-2.0-flash-lite-preview-02-05");
+    } else if (modelName === "gemini-think") {
+      model = google("gemini-2.0-pro-exp-02-05");
     }
 
     if (openaiOpts) {
       settings = {
         providerOptions: {
-          openai: { reasoningEffort: "medium" },
+          openai: openaiOpts,
         },
       };
     }
