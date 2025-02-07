@@ -91,13 +91,13 @@ export default async function handler(req: NextRequest) {
     }
     // gemini
     else if (modelName === "gemini") {
-      model = google("gemini-2.0-pro-exp-02-05");
-    } else if (modelName === "gemini-flash") {
       model = google("gemini-2.0-flash-001");
+    } else if (modelName === "gemini-think") {
+      model = google("gemini-2.0-flash-thinking-exp-01-21");
     } else if (modelName === "gemini-flash-lite") {
       model = google("gemini-2.0-flash-lite-preview-02-05");
     } else if (modelName === "gemini-think") {
-      model = google("gemini-2.0-flash-thinking-exp-01-21");
+      model = google("gemini-2.0-pro-exp-02-05");
     }
 
     if (openaiOpts) {
