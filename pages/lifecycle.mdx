@@ -1,6 +1,6 @@
 ## Lifecycle Overview
 
-In awe, **Scripts**, **Components** and **Behaviors** have special lifecycle methods that run at key moments:
+In awe, **Scripts**, **ScriptComponents** and **ScriptBehaviors** have special lifecycle methods that run at key moments:
 
 ```ts copy filename="main"
 export default class GameManager {
@@ -42,3 +42,43 @@ Runs when the game ends (e.g., after `World.stop()`).
 The final cleanup hook after a session ends. Release or unsubscribe resources here.
 
 Use these methods to manage your game’s flow and keep logic organized and responsive.
+
+## ScriptComponent Lifecycle
+
+Components are a superset of Scripts. They have the same lifecycle methods, but also have rendering lifecycle callbacks
+
+### `onRender()`
+
+Invoked when the host component is initialized. Typically used to initialize state and create a Mesh and materials for the component.
+
+### `onRenderUpdate()`
+
+Invoked when the host component is updated. Typically used to update the Mesh and materials for the component. i.e. a spinning cube.
+
+### `onRenderDispose()`
+
+Invoked when the host component is disposed. Typically used to dispose of the Mesh and materials for the component.
+
+### `onGetCollisionMesh()`
+
+Invoked when the host component is asked for its collision mesh (if any). This can be overrided to define a custom collision mesh rather than the one defined in `onRender()`.
+
+## ScriptBehavior Lifecycle
+
+ScriptBehaviors are a superset of ScriptComponents. They have the same script lifecycle methods, but also have animation and collision lifecycle callbacks.
+
+### Differences between ScriptComponents and ScriptBehaviors
+
+Please note that these methods are also available on ScriptComponents with two main differences:
+- ScriptBehaviors retain collision lifecycles across programatic duplicates of the host component, whereas ScriptComponents do not. This is important since the callbacks below will not be initialized on programatic duplicates of ScriptComponents. For example, if you have a collectable coin, and you duplicate it, the duplicate will not have the same collision behavior.
+- ScriptBehaviors can be applied to components within the GUI editor, whereas ScriptComponents cannot be.
+- ScriptComponents can be added directly to a scene via the GUI editor, whereas ScriptBehaviors must be added either by code, or by adding a Behavior to a ScriptComponent via the GUI editor.
+
+### `onEditorMeshClicked(mesh, intersect)`, `onEditorMeshMouseEnter(mesh, intersect)`, `onEditorMeshMouseLeave(mesh)`
+Triggered when a mesh is clicked, hovered over, or left in the editor. Provides the clicked/hovered mesh and intersection details.
+
+### `handleSensorEnter(event)`, `handleSensorExit(event)`, `handleSensorStay(event)`
+Triggered when an object enters, exits, or remains within the sensor area of the host component. For example, this could be used to make a component collectable.
+
+### `handleCollisionEnter(event)`, `handleCollisionExit(event)`, `handleCollisionStay(event)`
+Triggered when a collision begins, ends, or remains between the host and another object. For example, this could be used to add a pushback force to the host when it collides with the player.
