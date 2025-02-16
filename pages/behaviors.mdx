@@ -5,7 +5,7 @@ Behaviors are reusable scripts that attach directly to existing Components in aw
 
 ---
 
-## Minimal Behavior
+## Minimal Example
 
 1. **Create a new script** with:
    ```ts
@@ -19,7 +19,7 @@ Behaviors are reusable scripts that attach directly to existing Components in aw
 
 ---
 
-## Adding Actions
+### Adding Actions
 
 For a simple rotation, add `onUpdate`:
 
@@ -31,6 +31,20 @@ onUpdate(dt: number) {
 
 - **`this.host`** refers to the attached Component.  
 - Behaviors support other lifecycle methods like `onStart` or `onDispose`.
+
+---
+
+### Adding Collisions
+
+For a simple collision, add `handleCollisionEnter`:
+
+```ts
+handleCollisionEnter(event: CollisionEvent) {
+  console.log("Collision detected!");
+}
+```
+
+> **Note:** Collision settings defined on parent components take precedence over those defined in behaviors. So when using the GUI editor, ensure that collisions are enabled only on the behavior script and not the parent component.
 
 ---
 
@@ -56,7 +70,7 @@ Users can now adjust `speed` in the Inspector.
 
 ---
 
-## Organizing UI with Folders
+### Organizing Studio UI with Folders
 
 Use `@Folder` to group parameters:
 
@@ -74,7 +88,7 @@ export default class ExampleBehavior extends ScriptBehavior {
 
 ---
 
-## Config
+### Config
 
 You can add descriptive metadata:
 
